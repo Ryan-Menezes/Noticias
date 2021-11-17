@@ -1,4 +1,4 @@
-storage/app/public/*
-storage/framework/cache/*
-storage/logs/*
-vendor/
+/storage/app/public/*
+/storage/framework/cache/*
+/storage/logs/*
+/vendor/

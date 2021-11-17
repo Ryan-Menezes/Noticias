@@ -10,4 +10,4 @@ composer update
 Após essa configuração inicial, vá na raiz do projeto e procure pelo diretório "config/", por lá faça as configurações da aplicação, principalmente no arquivo "config/app.php".
 
 ## Informações Adicionais
-Template do Site: [HVAC](https://themewagon.com/themes/free-bootstrap-4-html5-news-website-template-newsbox/)<br>
+Template do Site: [NEWSBOX](https://themewagon.com/themes/free-bootstrap-4-html5-news-website-template-newsbox/)<br>

@@ -29,7 +29,7 @@ class Upload{
 			$dirComplete = Storage::dir() . '/' . trim($dir, '/') . '/';
 
 			if(!is_dir($dirComplete))
-				mkdir($dirComplete);
+				mkdir($dirComplete, 0777, true);
 
 			if(move_uploaded_file($this->file->tmp_name, $dirComplete . $filename)){
 				return (trim($dir, '/') . '/' . $filename);

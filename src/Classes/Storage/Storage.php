@@ -11,7 +11,13 @@ class Storage{
 		$dirname = config('upload.dir');
 		$directories = config('upload.directories');
 		
-		return dirname(__DIR__, 3) . '/' . trim($directories[$dirname], '/');
+		$dir = dirname(__DIR__, 3) . '/' . trim($directories[$dirname], '/');
+
+		if(!is_dir($dir)){
+			mkdir($dir, 0777, true);
+		}
+
+		return $dir;
 	}
 
 	/**
