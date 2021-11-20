@@ -136,7 +136,7 @@ class NoticeController extends Controller{
 		$paragraphIndex = 0;
 		$imageIndex = 0;
 
-		$this->validator($data, $this->notice->rolesUpdate);
+		$this->validator($data, $notice->rolesUpdate);
 
 		// Remove imagens que foram deletadas
 		if(!empty($imagesRemove)){

@@ -10,14 +10,14 @@ class Role extends Model{
 
 	public function getRolesCreateAttribute(){
 		return [
-			'name' 			=> 'required|min:1|max:100',
+			'name' 			=> "required|min:1|max:100|unique:{$this->table},name",
 			'description' 	=> 'required'
 		];
 	}
 
 	public function getRolesUpdateAttribute(){
 		return [
-			'name' 			=> 'required|min:1|max:100',
+			'name' 			=> "required|min:1|max:100|unique:{$this->table},name,{$this->name}",
 			'description' 	=> 'required'
 		];
 	}

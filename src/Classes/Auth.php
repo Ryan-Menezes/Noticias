@@ -21,8 +21,13 @@ class Auth{
 		if(is_null($user)) 
 			return false;
 
-		if(!password_verify($password, $user->password)) 
+		if(!password_verify($password, $user->password))
 			return false;
+
+		if(password_needs_rehash($user->password, PASSWORD_DEFAULT)){
+			$user = password_hash($password, PASSWORD_DEFAULT);
+			$user->save();
+		}
 
 		session(self::NAMESESSION, ['user' => $user]);
 		return true;

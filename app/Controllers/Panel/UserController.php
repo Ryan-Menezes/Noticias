@@ -76,7 +76,7 @@ class UserController extends Controller{
 		$request = new Request();
 		$data = $request->all();
 
-		$this->validator($data, $this->user->rolesUpdate);
+		$this->validator($data, $user->rolesUpdate);
 		if(mb_strlen($data['password']) == 0){
 			unset($data['password']);
 		}else{

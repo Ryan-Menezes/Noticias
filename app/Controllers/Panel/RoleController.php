@@ -76,7 +76,7 @@ class RoleController extends Controller{
 		$request = new Request();
 		$data = $request->all();
 
-		$this->validator($data, $this->role->rolesUpdate);
+		$this->validator($data, $role->rolesUpdate);
 
 		if($role->update($data)){
 			if(!array_key_exists('permissions', $data))

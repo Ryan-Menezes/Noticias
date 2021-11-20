@@ -93,4 +93,33 @@ $(document).ready(function(){
 
         return false
     })
+
+    // Configurações do draggable e droppable
+    $('*').delegate('.content-notice .draggable', 'mouseenter', function(){
+        $(this).draggable({
+            axis: 'y',
+            revert: true,
+            containment: '.content-notice',
+            start: function(){
+                $(this).css('z-index', '999')
+            },
+            stop: function(){
+                $(this).css('z-index', '1')
+            }
+        })
+
+        $(this).droppable({
+            hoverClass: 'hover',
+            accept: '.content-notice .draggable',
+            drop: function(event, ui){
+                let ele1 = $(this).html()
+                let ele2 = $(ui.draggable[0]).html()
+
+                $(this).html(ele2)
+                $(ui.draggable[0]).html(ele1)
+            }
+        })
+
+        return false
+    })
 })

@@ -1,6 +1,8 @@
 <?php
 namespace Src\Classes;
 
+use Illuminate\Database\Capsule\Manager as DB;
+
 class Validator{
 	/** @var array */
 	private static $roles = [
@@ -8,7 +10,8 @@ class Validator{
 		'email',
 		'numeric',
 		'min',
-		'max'
+		'max',
+		'unique'
 	];
 
 	/** @var array */
@@ -17,7 +20,8 @@ class Validator{
 		'email' 	=> 'O campo %key% deve ser um email válido!',
 		'numeric' 	=> 'O campo %key% deve ser do tipo numérico',
 		'min' 		=> 'O campo %key% deve conter no minímo %min% caractertes',
-		'max' 		=> 'O campo %key% deve conter no máximo %max% caractertes'
+		'max' 		=> 'O campo %key% deve conter no máximo %max% caractertes',
+		'unique' 	=> 'O campo %key% já está existe, Tente outro valor!'
 	];
 
 	/** @var array */
@@ -199,6 +203,38 @@ class Validator{
 				$message = str_ireplace($search, $replace, self::$messages["{$key}.max"]);
 			}else{
 				$message = str_ireplace($search, $replace, self::$messages['max']);
+			}
+
+			self::addMessage($message);
+		}
+	}
+
+	/**
+	  * Method that validates whether a field already exists in a column of a table in the database
+	  * 
+	  * @param string
+	  * @param string|numeric
+	  * @param string
+	  * @param string
+	  * @param string|null
+	  *
+	  * @return void
+	  */
+	private static function unique(string $key, $value, string $table, string $column, ?string $ignore = null) : void{
+		$search  = ['%key%'];
+		$replace = [$key];
+
+		$query = DB::table($table)->where($column, $value);
+
+		if(!is_null($ignore)){
+			$query->where($column, '!=', $ignore);
+		}
+
+		if($query->exists()){
+			if(array_key_exists("{$key}.unique", self::$messages)){
+				$message = str_ireplace($search, $replace, self::$messages["{$key}.unique"]);
+			}else{
+				$message = str_ireplace($search, $replace, self::$messages['unique']);
 			}
 
 			self::addMessage($message);

@@ -10,13 +10,13 @@ class Category extends Model{
 
 	public function getRolesCreateAttribute(){
 		return [
-			'name' 	=> 'required|min:1|max:100'
+			'name' 	=> "required|min:1|max:100|unique:{$this->table},name"
 		];
 	}
 
 	public function getRolesUpdateAttribute(){
 		return [
-			'name' 	=> 'required|min:1|max:100'
+			'name' 	=> "required|min:1|max:100|unique:{$this->table},name,{$this->name}"
 		];
 	}
 

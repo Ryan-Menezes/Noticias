@@ -1,4 +1,4 @@
-<div class="form-group content-group mb-2 border p-2 {{ $class ?? null }}">
+<div class="form-group content-group mb-2 border p-2 bg-light {{ $class ?? null }}">
 	<input type="hidden" name="elements[]" value="TEXTEDITOR">
 	<div class="mb-2">
 		<button type="button" class="btn btn-sm border textarea-editor-btn" title="Negrito" data-type="bold"><i class="fas fa-bold"></i></button>

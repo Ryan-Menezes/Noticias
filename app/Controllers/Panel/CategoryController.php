@@ -65,7 +65,7 @@ class CategoryController extends Controller{
 		$request = new Request();
 		$data = $request->all();
 
-		$this->validator($data, $this->category->rolesUpdate);
+		$this->validator($data, $category->rolesUpdate);
 		$data['slug'] = slugify($data['name']);
 
 		if($category->update($data)){
