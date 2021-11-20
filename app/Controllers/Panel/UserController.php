@@ -45,7 +45,7 @@ class UserController extends Controller{
 		$request = new Request();
 		$data = $request->all();
 
-		$this->validator($data, $this->user->rolesCreate);
+		$this->validator($data, $this->user->rolesCreate, $this->user->messages);
 		$data['password'] = password_hash($data['password'], PASSWORD_DEFAULT);
 
 		$user = $this->user->create($data);
@@ -76,7 +76,7 @@ class UserController extends Controller{
 		$request = new Request();
 		$data = $request->all();
 
-		$this->validator($data, $user->rolesUpdate);
+		$this->validator($data, $user->rolesUpdate, $user->messages);
 		if(mb_strlen($data['password']) == 0){
 			unset($data['password']);
 		}else{

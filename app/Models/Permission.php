@@ -22,6 +22,16 @@ class Permission extends Model{
 		];
 	}
 
+	public function getMessagesAttribute(){
+		return [
+			'name.required' 		=> 'O preenchimento do campo nome é obrigatório!',
+			'name.min' 				=> 'O campo nome deve conter no mínimo %min% caracteres!',
+			'name.max' 				=> 'O campo nome deve conter no máximo %max% caracteres!',
+			'name.unique' 			=> 'Este nome já está sendo utilizado, Tente outro nome!',
+			'description.required' 	=> 'O preenchimento do campo descrição é obrigatório!'
+		];
+	}
+
 	public function scopeSearch($query, $page = 0, $filter = ''){
 		$limit = config('paginate.limit');
 		$page = ($page - 1) * $limit;
@@ -29,6 +39,7 @@ class Permission extends Model{
 		return $query
 					->orWhere('name', 'LIKE', "%{$filter}%")
 					->orWhere('description', 'LIKE', "%{$filter}%")
+					->orderBy('id', 'DESC')
 					->offset($page)
 					->limit($limit)
 					->get();

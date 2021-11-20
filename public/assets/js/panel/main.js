@@ -55,6 +55,24 @@ $(document).ready(function(){
         return false
     })
 
+    // Configurações do youtube player
+    $('*').delegate('.youtube-url-video', 'change', function(){
+        let input = $(this)
+        let player = input.parents('.content-group').find('label iframe')
+        let url = input.val()
+
+        if(url.trim().length > 0){
+            // let videoCode = url.split('/[\/=]/i')
+            let videoCode = url.split('=')
+            videoCode = videoCode[videoCode.length - 1]
+
+            player.attr('src', `https://www.youtube.com/embed/${videoCode}`)
+            player.show()
+        }
+
+        return false
+    })
+
     // Configurações de remoção de um elemento
     $('*').delegate('.btn-remove-element', 'click', function(){
         if(confirm('Deseja realmente remover este elemento?')){
@@ -63,7 +81,7 @@ $(document).ready(function(){
 
             $(this).parents('.content-group').remove()
 
-            if(data.remove.length > 0){
+            if(data.remove != undefined && data.remove.length > 0){
                 if(input.val().length == 0){
                     input.val(data.remove)
                 }else{
@@ -95,7 +113,7 @@ $(document).ready(function(){
     })
 
     // Configurações do draggable e droppable
-    $('*').delegate('.content-notice .draggable', 'mouseenter', function(){
+    $('*').delegate('.content-notice .draggable', 'load mouseenter', function(){
         $(this).draggable({
             axis: 'y',
             revert: true,

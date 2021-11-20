@@ -38,6 +38,16 @@ class Notice extends Model{
 		return date('d/m/Y H:i:s', strtotime($this->updated_at));
 	}
 
+	public function getMessagesAttribute(){
+		return [
+			'title.required' 		=> 'O preenchimento do campo titulo é obrigatório!',
+			'title.min' 			=> 'O campo titulo deve conter no mínimo %min% caracteres!',
+			'title.max' 			=> 'O campo titulo deve conter no máximo %max% caracteres!',
+			'title.unique' 			=> 'Este título já está sendo utilizado, Tente outro titulo!',
+			'description.required' 	=> 'O preenchimento do campo descrição é obrigatório!'
+		];
+	}
+
 	public function scopeSearch($query, $page = 0, $filter = ''){
 		$limit = config('paginate.limit');
 		$page = ($page - 1) * $limit;
@@ -48,6 +58,7 @@ class Notice extends Model{
 					->orWhere('tags', 'LIKE', "%{$filter}%")
 					->orWhere('description', 'LIKE', "%{$filter}%")
 					->orWhere('content', 'LIKE', "%{$filter}%")
+					->orderBy('id', 'DESC')
 					->offset($page)
 					->limit($limit)
 					->get();

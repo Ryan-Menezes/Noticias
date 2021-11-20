@@ -9,6 +9,10 @@ use Src\Classes\Auth;
 
 class AuthController extends Controller{
 	public function index(){
+		if(Auth::hasAuthenticate()){
+			redirect(route('panel'));
+		}
+		
 		return view('panel.auth.index');
 	}
 

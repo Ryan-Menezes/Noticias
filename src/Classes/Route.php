@@ -435,14 +435,20 @@ class Route{
 							echo $controller->$method(...$parameters);
 							return;
 						}catch(Exception $error){
-							abort(404);
+							if(!config('app.debug'))
+								abort(404);
+							
+							self::addError($error->getCode(), $error->getMessage(), $error->getLine(), $error->getFile());
 						}							
 					}else{
 						try{
 							echo $route['function']();
 							return;
 						}catch(Exception $error){
-							abort(404);
+							if(!config('app.debug'))
+								abort(404);
+							
+							self::addError($error->getCode(), $error->getMessage(), $error->getLine(), $error->getFile());
 						}
 					}
 				}

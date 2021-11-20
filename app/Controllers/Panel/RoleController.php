@@ -45,7 +45,7 @@ class RoleController extends Controller{
 		$request = new Request();
 		$data = $request->all();
 
-		$this->validator($data, $this->role->rolesCreate);
+		$this->validator($data, $this->role->rolesCreate, $this->role->messages);
 
 		$role = $this->role->create($data);
 
@@ -76,7 +76,7 @@ class RoleController extends Controller{
 		$request = new Request();
 		$data = $request->all();
 
-		$this->validator($data, $role->rolesUpdate);
+		$this->validator($data, $role->rolesUpdate, $role->messages);
 
 		if($role->update($data)){
 			if(!array_key_exists('permissions', $data))

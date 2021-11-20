@@ -41,7 +41,7 @@ class CategoryController extends Controller{
 		$request = new Request();
 		$data = $request->all();
 
-		$this->validator($data, $this->category->rolesCreate);
+		$this->validator($data, $this->category->rolesCreate, $this->category->messages);
 		$data['slug'] = slugify($data['name']);
 
 		if($this->category->create($data)){
@@ -65,7 +65,7 @@ class CategoryController extends Controller{
 		$request = new Request();
 		$data = $request->all();
 
-		$this->validator($data, $category->rolesUpdate);
+		$this->validator($data, $category->rolesUpdate, $category->messages);
 		$data['slug'] = slugify($data['name']);
 
 		if($category->update($data)){

@@ -26,6 +26,19 @@ class User extends Model{
 		];
 	}
 
+	public function getMessagesAttribute(){
+		return [
+			'name.required' 		=> 'O preenchimento do campo nome é obrigatório!',
+			'name.min' 				=> 'O campo nome deve conter no mínimo %min% caracteres!',
+			'name.max' 				=> 'O campo nome deve conter no máximo %max% caracteres!',
+			'email.unique' 			=> 'Este email já está sendo utilizado, Tente outro email!',
+			'password.required' 	=> 'O preenchimento do campo nome é obrigatório!',
+			'password.min' 			=> 'O campo senha deve conter no mínimo %min% caracteres!',
+			'password.max' 			=> 'O campo senha deve conter no máximo %max% caracteres!',
+			'role.required' 		=> 'Selecione uma função que este usuário exercerá no sistema!'
+		];
+	}
+
 	public function getCreatedAtFormatAttribute(){
 		if(empty($this->created_at))
 			return null;
@@ -47,6 +60,7 @@ class User extends Model{
 		return $query
 					->orWhere('name', 'LIKE', "%{$filter}%")
 					->orWhere('email', 'LIKE', "%{$filter}%")
+					->orderBy('id', 'DESC')
 					->offset($page)
 					->limit($limit)
 					->get();

@@ -59,19 +59,37 @@ class NoticeController extends Controller{
 		$data = $request->all();
 		$elements = $request->input('elements');
 		$paragraphs = $request->input('paragraphs');
+		$youtubeUrls = $request->input('urls-video');
 		$images = $request->file('images');
 		$titleImages = $request->input('title-images');
 		$paragraphIndex = 0;
+		$youtubeIndex = 0;
 		$imageIndex = 0;
 
-		$this->validator($data, $this->notice->rolesCreate);
+		$this->validator($data, $this->notice->rolesCreate, $this->notice->messages);
 
 		foreach($elements as $element){
 			if($element == 'TEXTEDITOR'){
-				$content['elements'][] = [
-					'type' => 'paragraph',
-					'content' => $paragraphs[$paragraphIndex++]
-				];
+				if(mb_strlen($paragraphs[$paragraphIndex]) > 0){
+					$content['elements'][] = [
+						'type' 		=> 'paragraph',
+						'content' 	=> $paragraphs[$paragraphIndex]
+					];
+				}
+
+				$paragraphIndex++;
+			}else if($element == 'YOUTUBEEDITOR'){
+				if(mb_strlen($youtubeUrls[$youtubeIndex]) > 0){
+					$url = preg_split('/[\/=]/i', $youtubeUrls[$youtubeIndex]);
+
+					$content['elements'][] = [
+						'type' 			=> 'youtube',
+						'videocode' 	=> end($url),
+						'url'			=> $youtubeUrls[$youtubeIndex]
+					];
+				}
+
+				$youtubeIndex++;
 			}else if($element == 'IMAGEEDITOR'){
 				if(isset($images[$imageIndex])){
 					$image = $images[$imageIndex];
@@ -84,8 +102,8 @@ class NoticeController extends Controller{
 							$path = $filename;
 
 							$content['elements'][] = [
-								'type' => 'image',
-								'src' => $filename,
+								'type' 	=> 'image',
+								'src' 	=> $filename,
 								'title' => $title
 							];
 						}
@@ -128,15 +146,17 @@ class NoticeController extends Controller{
 		$data = $request->all();
 		$elements = $request->input('elements');
 		$paragraphs = $request->input('paragraphs');
+		$youtubeUrls = $request->input('urls-video');
 		$images = $request->file('images');
 		$poster = $request->file('poster');
 		$titleImages = $request->input('title-images');
 		$imagesEdit = explode(',', $request->input('images-notice-edit'));
 		$imagesRemove = explode(',', $request->input('images-notice-remove'));
 		$paragraphIndex = 0;
+		$youtubeIndex = 0;
 		$imageIndex = 0;
 
-		$this->validator($data, $notice->rolesUpdate);
+		$this->validator($data, $notice->rolesUpdate, $notice->messages);
 
 		// Remove imagens que foram deletadas
 		if(!empty($imagesRemove)){
@@ -160,12 +180,24 @@ class NoticeController extends Controller{
 			if($element == 'TEXTEDITOR'){
 				if(mb_strlen($paragraphs[$paragraphIndex]) > 0){
 					$content['elements'][] = [
-						'type' => 'paragraph',
-						'content' => $paragraphs[$paragraphIndex]
+						'type' 		=> 'paragraph',
+						'content' 	=> $paragraphs[$paragraphIndex]
 					];
 				}
 
 				$paragraphIndex++;
+			}else if($element == 'YOUTUBEEDITOR'){
+				if(mb_strlen($youtubeUrls[$youtubeIndex]) > 0){
+					$url = preg_split('/[\/=]/i', $youtubeUrls[$youtubeIndex]);
+
+					$content['elements'][] = [
+						'type' 			=> 'youtube',
+						'videocode' 	=> end($url),
+						'url'			=> $youtubeUrls[$youtubeIndex]
+					];
+				}
+
+				$youtubeIndex++;
 			}else if($element == 'IMAGEEDITOR'){
 				if(isset($images[$imageIndex])){
 					$image = $images[$imageIndex];
@@ -178,8 +210,8 @@ class NoticeController extends Controller{
 							$path = $filename;
 
 							$content['elements'][] = [
-								'type' => 'image',
-								'src' => $filename,
+								'type' 	=> 'image',
+								'src' 	=> $filename,
 								'title' => $title
 							];
 
@@ -192,8 +224,8 @@ class NoticeController extends Controller{
 					}else{
 						if(!empty($imagesEdit)){
 							$content['elements'][] = [
-								'type' => 'image',
-								'src' => trim($imagesEdit[0]),
+								'type' 	=> 'image',
+								'src' 	=> trim($imagesEdit[0]),
 								'title' => $title
 							];
 

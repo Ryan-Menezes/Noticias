@@ -70,6 +70,12 @@
 						'title' => 'Digite o texto do parágrafo...',
 						'value' => $element->content
 					])
+				@elseif($element->type == 'youtube')
+					@include('includes.components.form.youtubeeditor', [
+						'url' => 'https://www.youtube.com/embed/' . $element->videocode,
+						'texturl' => $element->url,
+						'class' => 'draggable'
+					])
 				@elseif($element->type == 'image')
 					@include('includes.components.form.imageeditor', [
 						'title' => $element->title,
@@ -93,6 +99,10 @@
 			@include('includes.components.form.imageeditor', [
 				'class' => 'draggable'
 			])
+
+			@include('includes.components.form.youtubeeditor', [
+				'class' => 'draggable'
+			])
 		@endif
 
 		<input type="hidden" name="images-notice-edit" value="{{ implode(',', $images) }}">
@@ -102,7 +112,10 @@
 	<div class="row text-center mb-5">
 		<div class="col-md-12">
 			<button type="button" class="btn border" data-name="paragraphs[]" data-class="paragraph draggable" data-title="Digite o texto do parágrafo..." data-urlajax="{{ route('panel.notices.component', ['name' => 'form.texteditor']) }}">Adicionar parágrafo <i class="fas fa-paragraph"></i></button>
+
 			<button type="button" class="btn border" data-class="draggable" data-urlajax="{{ route('panel.notices.component', ['name' => 'form.imageeditor']) }}">Adicionar imagem <i class="fas fa-image"></i></button>
+
+			<button type="button" class="btn border" data-class="draggable" data-urlajax="{{ route('panel.notices.component', ['name' => 'form.youtubeeditor']) }}">Adicionar Video do Youtube <i class="fas fa-video"></i></button>
 		</div>
 	</div>
 
