@@ -16,7 +16,8 @@
 			'can' => 'create.categories',
 			'urlSearch' => route('panel.categories'),
 			'urlCreate' => route('panel.categories.create'),
-			'create' => true
+			'create' => true,
+			'title' => 'Nova Categoria'
 		])
 
 		@include('includes.messages')
@@ -36,11 +37,11 @@
 					<td>{{ $category->name }}</td>
 					<td>
 						@if(can('edit.categories'))
-							<a href="{{ route('panel.categories.edit', ['id' => $category->id]) }}" class="btn btn-sm btn-primary"><i class="fas fa-pencil-alt"></i></a>
+							<a href="{{ route('panel.categories.edit', ['id' => $category->id]) }}" class="btn btn-sm btn-primary" title="Editar Categoria"><i class="fas fa-pencil-alt"></i></a>
 						@endif
 
 						@if(can('delete.categories'))
-							<a href="javascript:void(0)" class="btn btn-sm btn-danger btn-delete" data-route="{{ route('panel.categories.destroy', ['id' => $category->id]) }}" data-bs-toggle="modal" data-bs-target="#modalDelete"><i class="fas fa-trash"></i></a>
+							<a href="javascript:void(0)" class="btn btn-sm btn-danger btn-delete" data-route="{{ route('panel.categories.destroy', ['id' => $category->id]) }}" data-bs-toggle="modal" data-bs-target="#modalDelete" title="Deletar Categoria"><i class="fas fa-trash"></i></a>
 						@endif
 					</td>
 				</tr>

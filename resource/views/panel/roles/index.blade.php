@@ -16,7 +16,8 @@
 			'can' => 'create.roles',
 			'urlSearch' => route('panel.roles'),
 			'urlCreate' => route('panel.roles.create'),
-			'create' => true
+			'create' => true,
+			'title' => 'Nova Função'
 		])
 
 		@include('includes.messages')
@@ -38,11 +39,11 @@
 					<td>{{ $role->description }}</td>
 					<td>
 						@if(can('edit.roles'))
-							<a href="{{ route('panel.roles.edit', ['id' => $role->id]) }}" class="btn btn-sm btn-primary"><i class="fas fa-pencil-alt"></i></a>
+							<a href="{{ route('panel.roles.edit', ['id' => $role->id]) }}" class="btn btn-sm btn-primary" title="Editar Função"><i class="fas fa-pencil-alt"></i></a>
 						@endif
 
 						@if(can('delete.roles'))
-							<a href="javascript:void(0)" class="btn btn-sm btn-danger btn-delete" data-route="{{ route('panel.roles.destroy', ['id' => $role->id]) }}" data-bs-toggle="modal" data-bs-target="#modalDelete"><i class="fas fa-trash"></i></a>
+							<a href="javascript:void(0)" class="btn btn-sm btn-danger btn-delete" data-route="{{ route('panel.roles.destroy', ['id' => $role->id]) }}" data-bs-toggle="modal" data-bs-target="#modalDelete" title="Deletar Função"><i class="fas fa-trash"></i></a>
 						@endif
 					</td>
 				</tr>

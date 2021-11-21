@@ -11,7 +11,7 @@
 			])
 		</div>
 		<div class="col-md-1">
-			<button type="button" class="btn btn-sm btn-danger btn-remove-element float-end" title="Remover"><i class="fas fa-trash-alt"></i></button>
+			<button type="button" class="btn btn-sm btn-danger btn-remove-element float-end" title="Remover Elemento"><i class="fas fa-trash-alt"></i></button>
 		</div>
 	</div>
 	<label class="label-img">

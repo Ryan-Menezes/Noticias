@@ -31,26 +31,28 @@
 		<div>
 			@include('includes.panel.header')
 
-			<main class="content-breadcrumb">
-				<nav aria-label="breadcrumb" class="p-3 border">
-					<ol class="breadcrumb p-0 m-0">
-						@php $routeComplete = '' @endphp
-						@foreach(explode('/', route()) as $route)
-							@php $routeComplete .= $route . '/' @endphp
+			<section class="content-main">
+				<main class="content-breadcrumb">
+					<nav aria-label="breadcrumb" class="p-3 border">
+						<ol class="breadcrumb p-0 m-0">
+							@php $routeComplete = '' @endphp
+							@foreach(explode('/', route()) as $route)
+								@php $routeComplete .= $route . '/' @endphp
 
-							@if(!$loop->last)
-					    	<li class="breadcrumb-item"><a href="{{ url($routeComplete) }}">{{ $route }}</a></li>
-					    	@else
-					    	@php $routeComplete = $route @endphp
-					    	@endif
-					    @endforeach
-					    <li class="breadcrumb-item active" aria-current="page">{{ trim($routeComplete, '/') }}</li>
-					</ol>
-				</nav>
-			</main>
-			<main class="content-view">
-				@yield('container')
-			</main>
+								@if(!$loop->last)
+						    	<li class="breadcrumb-item"><a href="{{ url($routeComplete) }}">{{ $route }}</a></li>
+						    	@else
+						    	@php $routeComplete = $route @endphp
+						    	@endif
+						    @endforeach
+						    <li class="breadcrumb-item active" aria-current="page">{{ trim($routeComplete, '/') }}</li>
+						</ol>
+					</nav>
+				</main>
+				<main class="content-view">
+					@yield('container')
+				</main>
+			</section>
 		</div>
 	</section>
 

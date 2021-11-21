@@ -5,7 +5,7 @@
 				<input type="search" name="search" placeholder="Buscar" class="form-control">
 			</div>
 			<div class="col-md-2">
-				<a href="{{ $urlCreate ?? null }}" class="btn btn-danger float-end">Novo <i class="fas fa-plus-circle"></i></a>
+				<a href="{{ $urlCreate ?? null }}" class="btn btn-danger float-end" title="{{ $title ?? 'Novo' }}">Novo <i class="fas fa-plus-circle"></i></a>
 			</div>
 		</div>
 	@else

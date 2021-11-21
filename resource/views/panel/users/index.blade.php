@@ -7,7 +7,7 @@
 		@include('includes.components.modais.delete', [
 			'title' => 'Deletar Usuário',
 			'message' => 'Deseja realmente deletar este usuário?',
-			'btnmsg' => 'Deletar'
+			'btnmsg' => 'Deletar',
 		])
 	@endif
 
@@ -16,7 +16,8 @@
 			'can' => 'create.users',
 			'urlSearch' => route('panel.users'),
 			'urlCreate' => route('panel.users.create'),
-			'create' => true
+			'create' => true,
+			'title' => 'Novo Usuário'
 		])
 
 		@include('includes.messages')
@@ -42,11 +43,11 @@
 					<td>{{ $user->updatedAtFormat }}</td>
 					<td>
 						@if(can('edit.users'))
-							<a href="{{ route('panel.users.edit', ['id' => $user->id]) }}" class="btn btn-sm btn-primary"><i class="fas fa-pencil-alt"></i></a>
+							<a href="{{ route('panel.users.edit', ['id' => $user->id]) }}" class="btn btn-sm btn-primary" title="Editar Usuário"><i class="fas fa-pencil-alt"></i></a>
 						@endif
 
 						@if(can('delete.users'))
-							<a href="javascript:void(0)" class="btn btn-sm btn-danger btn-delete" data-route="{{ route('panel.users.destroy', ['id' => $user->id]) }}" data-bs-toggle="modal" data-bs-target="#modalDelete"><i class="fas fa-trash"></i></a>
+							<a href="javascript:void(0)" class="btn btn-sm btn-danger btn-delete" data-route="{{ route('panel.users.destroy', ['id' => $user->id]) }}" data-bs-toggle="modal" data-bs-target="#modalDelete" title="Deletar Usuário"><i class="fas fa-trash"></i></a>
 						@endif
 					</td>
 				</tr>
