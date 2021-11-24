@@ -2,13 +2,14 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <meta name="description" content="">
+    <meta name="keywords" content="@yield('keywords')">
+    <meta name="description" content="@yield('description')">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
     <!-- The above 4 meta tags *must* come first in the head; any other head content must come *after* these tags -->
 
     <!-- Title -->
-    <title>Newsbox - Modern Magazine &amp; Newspaper HTML Template</title>
+    <title>{{ config('app.name') }} | @yield('title')</title>
 
     <!-- Favicon -->
     <link rel="icon" href="{{ public_path('assets/img/site/core-img/favicon.ico') }}">
@@ -36,9 +37,8 @@
                 <div class="container-fluid">
                     <!-- Menu -->
                     <nav class="classy-navbar justify-content-between" id="newsboxNav">
-
                         <!-- Nav brand -->
-                        <a href="index.html" class="nav-brand"><img src="{{ public_path('assets/img/site/core-img/logo.png') }}" alt=""></a>
+                        <a href="{{ route('site') }}" class="nav-brand" title="{{ config('app.name') }}"><img src="{{ public_path('assets/img/site/core-img/logo.png') }}" alt="{{ config('app.name') }}" title="{{ config('app.name') }}"></a>
 
                         <!-- Navbar Toggler -->
                         <div class="classy-navbar-toggler">
@@ -56,83 +56,22 @@
                             <!-- Nav Start -->
                             <div class="classynav">
                                 <ul>
-                                    <li><a href="#">International</a>
-                                        <div class="megamenu">
-                                            <ul class="single-mega cn-col-4">
-                                                <li class="title">Europe</li>
-                                                <li><a href="#">United Kingdom</a></li>
-                                                <li><a href="#">Germany</a></li>
-                                                <li><a href="#">Latvia</a></li>
-                                                <li><a href="#">Poland</a></li>
-                                                <li><a href="#">Italy</a></li>
-                                                <li><a href="#">France</a></li>
-                                                <li><a href="#">Crotia</a></li>
-                                            </ul>
-                                            <ul class="single-mega cn-col-4">
-                                                <li class="title">Africa</li>
-                                                <li><a href="#">Algeria</a></li>
-                                                <li><a href="#">Angola</a></li>
-                                                <li><a href="#">Benin</a></li>
-                                                <li><a href="#">Botswana</a></li>
-                                                <li><a href="#">Burkina Faso</a></li>
-                                                <li><a href="#">Burundi</a></li>
-                                                <li><a href="#">Cameroon</a></li>
-                                            </ul>
-                                            <ul class="single-mega cn-col-4">
-                                                <li class="title">Asia</li>
-                                                <li><a href="#">Bangladesh</a></li>
-                                                <li><a href="#">Chaina</a></li>
-                                                <li><a href="#">India</a></li>
-                                                <li><a href="#">Afganistan</a></li>
-                                                <li><a href="#">Sri Lanka</a></li>
-                                                <li><a href="#">Nepal</a></li>
-                                                <li><a href="#">Bhutan</a></li>
-                                            </ul>
-                                            <ul class="single-mega cn-col-4">
-                                                <li class="title">USA &amp; Canada</li>
-                                                <li><a href="#">California</a></li>
-                                                <li><a href="#">Florida</a></li>
-                                                <li><a href="#">Alabama</a></li>
-                                                <li><a href="#">New Yorks</a></li>
-                                                <li><a href="#">Texas</a></li>
-                                                <li><a href="#">Lowa</a></li>
-                                                <li><a href="#">Montana</a></li>
-                                            </ul>
-                                        </div>
-                                    </li>
-                                    <li><a href="#">Local News</a></li>
-                                    <li><a href="#">Pages</a>
-                                        <ul class="dropdown">
-                                            <li><a href="index.html">Home</a></li>
-                                            <li><a href="catagory.html">Catagory</a></li>
-                                            <li><a href="single-post.html">Single Post</a></li>
-                                            <li><a href="contact.html">Contact</a></li>
-                                            <li><a href="elements.html">Elements</a></li>
-                                        </ul>
-                                    </li>
-                                    <li><a href="#">Sport</a>
-                                        <ul class="dropdown">
-                                            <li><a href="#">Archery</a></li>
-                                            <li><a href="#">Badminton</a></li>
-                                            <li><a href="#">Baseball</a></li>
-                                            <li><a href="#">Boxing</a></li>
-                                            <li><a href="#">Climbing</a></li>
-                                            <li><a href="#">Cricket</a></li>
-                                            <li><a href="#">Football</a></li>
-                                        </ul>
-                                    </li>
-                                    <li><a href="#">Lifestyle</a></li>
-                                </ul>
+                                    <li><a href="{{ route('site') }}" title="Página Inicial">Início</a></li>
+                                    <li><a href="{{ route('site.notices') }}" title="Notícias Atuais">Notícias Atuais</a></li>
 
-                                <!-- Header Add Area -->
-                                <div class="header-add-area">
-                                    <a href="#">
-                                       <img src="{{ public_path('assets/img/site/bg-img/add.png') }}" alt="">
-                                    </a>
-                                </div>
+                                    @for($i = 0; $i < 4; $i++)
+                                    <li><a href="{{ route('site.categories.show', ['slug' => $categories[$i]->slug]) }}" title="Notícias da Categoria {{ $categories[$i]->name }}">{{ $categories[$i]->name }}</a></li>
+                                    @endfor
+
+                                    <li><a href="javascript:vopid(0)" title="Outras Categórias">Outros</a>
+                                        <ul class="dropdown">
+                                            @for($i = 0; $i < count($categories); $i++)
+                                            <li><a href="{{ route('site.categories.show', ['slug' => $categories[$i]->slug]) }}" title="Notícias da Categoria {{ $categories[$i]->name }}">{{ $categories[$i]->name }}</a></li>
+                                            @endfor
+                                    </li>
+                                </ul>
                             </div>
                             <!-- Nav End -->
-
                         </div>
                     </nav>
                 </div>
@@ -147,7 +86,7 @@
     <footer class="footer-area">
         <!-- Footer Logo -->
         <div class="footer-logo mb-100">
-            <a href="index.html"><img src="{{ public_path('assets/img/site/core-img/logo.png') }}" alt=""></a>
+            <a href="{{ route('site') }}"><img src="{{ public_path('assets/img/site/core-img/logo.png') }}" alt="{{ config('app.name') }}" title="{{ config('app.name') }}"></a>
         </div>
         <!-- Footer Content -->
         <div class="container">

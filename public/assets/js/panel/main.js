@@ -1,11 +1,11 @@
 $(document).ready(function(){
-	$('.btn-delete').click(function(){
-		let route = $(this).data('route')
-		
-		if(route != undefined){
-			$('.modal-form-delete').attr('action', route)
-		}
-	})
+    $('.btn-delete').click(function(){
+        let route = $(this).data('route')
+        
+        if(route != undefined){
+            $('.modal-form-delete').attr('action', route)
+        }
+    })
 
     // Tooltip
     $('[title]').tooltip({
@@ -16,35 +16,49 @@ $(document).ready(function(){
     })
 
     // Configurações do menu
-    $('.open-menu').click(function(){
-        $('.content').toggleClass('close-menu')
-    })
+    if(localStorage.menuOpen !== undefined && localStorage.menuOpen == 'false'){
+        $('.content').addClass('close-menu')
+    }
 
-	// Configurações do form validade
-    $('.form-validate').validate({
-        errorElement: 'span',
-        messages: {
-            required: 'Este campo é obrigatório',
-            email: 'Por favor entre com um email válido'
+    $('.open-menu').click(function(){
+        if($('.content').hasClass('close-menu')){
+            $('.content').removeClass('close-menu')
+            localStorage.menuOpen = true
+        }else{
+            $('.content').addClass('close-menu')
+            localStorage.menuOpen = false
         }
     })
 
+    // Configurações do form validade
+    $('*').delegate('.form-validate', 'focus load', function(){
+        $(this).validate({
+            errorElement: 'span',
+            messages: {
+                required: 'Este campo é obrigatório',
+                email: 'Por favor entre com um email válido'
+            }
+        })
+
+        return false
+    })   
+
     // Configurações do textarea
     $('*').delegate('.textarea-editor-btn[data-type]', 'click', function(){
-    	let data = $(this).data()
-    	let element = $(this).parent().siblings('textarea')
-    	let types = {
-    		bold: 		'<span class="bold">Texto Aqui</span>',
-    		italic: 	'<span class="italic">Texto Aqui</span>',
-    		underline: 	'<span class="underline">Texto Aqui</span>',
-    		link: 		'<a href="Link de Redirecionamento" target="_blank" title="Titulo do Link">Texto Aqui</a>'
-    	}
+        let data = $(this).data()
+        let element = $(this).parent().siblings('textarea')
+        let types = {
+            bold:       '<span class="bold">Texto Aqui</span>',
+            italic:     '<span class="italic">Texto Aqui</span>',
+            underline:  '<span class="underline">Texto Aqui</span>',
+            link:       '<a href="Link de Redirecionamento" target="_blank" title="Titulo do Link">Texto Aqui</a>'
+        }
 
-    	if(types[data.type] !== undefined){
-    		element.val(element.val() + types[data.type])
-    	}
+        if(types[data.type] !== undefined){
+            element.val(element.val() + types[data.type])
+        }
 
-    	return false
+        return false
     })
 
     // Configurações da imagem
@@ -129,5 +143,5 @@ $(document).ready(function(){
     $('.content-notice').sortable()
 
     // Configuração para o container de checkbox
-    $('.container-check div').buttonset()
+    // $('.container-check div').buttonset()
 })

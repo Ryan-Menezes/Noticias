@@ -17,7 +17,7 @@
 		$id = md5(uniqid() . time());	
 	@endphp
 	<label class="label-img" for="img{{ $id }}">
-		<img src="{{ $image ?? public_path('assets/img/upload.png') }}" data-default="{{ $image ?? public_path('assets/img/upload.png') }}" title="Selecione uma Imagem" alt="Selecione uma Imagem" class="img-fluid border">
+		<img src="{{ $image ?? public_path('assets/img/panel/upload.png') }}" data-default="{{ $image ?? public_path('assets/img/panel/upload.png') }}" title="Selecione uma Imagem" alt="Selecione uma Imagem" class="img-fluid border">
 	</label>
 
 	<input type="file" name="images[]" accept="image/*" id="img{{ $id }}" class="image-upload" hidden>

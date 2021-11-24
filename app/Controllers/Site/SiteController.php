@@ -5,12 +5,16 @@ use Src\Classes\{
 	Request,
 	Controller
 };
-use App\Models\Notice;
+use App\Models\{
+	Notice,
+	Category
+};
 
 class SiteController extends Controller{
 	public function index(){
-		$notices = Notice::orderBy('updated_at', 'DESC')->get();
+		$notices = Notice::where('visible', true)->orderBy('id', 'DESC')->get();
+		$categories = Category::all();
 
-		return view('site.index', compact('notices'));
+		return view('site.index', compact('notices', 'categories'));
 	}
 }

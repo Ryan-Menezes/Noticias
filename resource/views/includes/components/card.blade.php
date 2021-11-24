@@ -1,4 +1,4 @@
-<a href="{{ $link }}">
+<a href="{{ $link }}" title="{{ $title }}">
 	<div class="card text-white mb-2 {{ $class }}">
 		<div class="card-body">
 			<h5 class="card-title">{{ $amount }}</h5>

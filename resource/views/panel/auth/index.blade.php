@@ -3,10 +3,11 @@
 @section('title', 'Login')
 
 @section('container')
+	@include('includes.messages')
+
 	<form action="{{ route('panel.login.validate') }}" method="POST" class="form p-4 border">
-		@include('includes.messages')
-		
-		<h1>Login</h1><hr>
+		<img src="{{ public_path('assets/img/site/core-img/logo.png') }}" title="{{ config('app.name') }}" alt="{{ config('app.name') }}"><hr>
+
 		<input type="hidden" name="_method" value="POST">
 		@include('includes.components.form.input', [
 			'type' => 'email',

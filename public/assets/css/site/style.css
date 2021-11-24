@@ -596,6 +596,9 @@ img {
   overflow: hidden;
   -webkit-transition-duration: 500ms;
   transition-duration: 500ms; }
+  .single-blog-post.style-1{
+    max-height: 300px;
+  }
   .single-blog-post.style-1 .blog-thumbnail {
     position: relative;
     z-index: 1;
@@ -1018,7 +1021,6 @@ img {
 .post-details-title-area {
   position: relative;
   z-index: 1;
-  height: 500px;
   padding: 35px 4%;
   background-color: #f0f4f8;
   margin: 0 20px 20px; }

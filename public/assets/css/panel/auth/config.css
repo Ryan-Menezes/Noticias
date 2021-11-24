@@ -13,11 +13,24 @@
 	background-size: cover;
 	flex-direction: column;
 }
+.content .alert{
+	width: 400px;
+	border-radius: 0px;
+}
 .content form{
 	width: 400px;
 	background-color: white;
-	border-radius: 5px;
-	box-shadow: 0px 0px 20px #1f1f1f;
+	border: 1px solid #1f1f1f;
+}
+.content form img{
+	width: 200px;
+}
+.content form .form-control{
+	border-radius: 0px;
+}
+.content form .btn{
+	border-radius: 0px;
+	margin-top: 20px;
 }
 .content form h1{
 	font-size: 25px;

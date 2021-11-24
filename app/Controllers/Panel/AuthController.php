@@ -19,11 +19,6 @@ class AuthController extends Controller{
 	public function login(){
 		$request = new Request();
 		$data = $request->all();
-		
-		$this->validator($data, [
-			'email' 	=> 'required|email',
-			'password' 	=> 'required'
-		]);
 
 		if(Auth::check($data['email'], $data['password'])){
 			redirect(route('panel'));
