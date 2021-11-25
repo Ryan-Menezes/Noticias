@@ -958,7 +958,6 @@ img {
 .catagory-featured-post {
   position: relative;
   z-index: 1;
-  height: 500px;
   padding: 35px 4%;
   background-color: #f0f4f8;
   margin: 0 20px 20px; }

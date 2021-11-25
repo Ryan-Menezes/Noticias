@@ -18,10 +18,15 @@ class NoticeController extends Controller{
 	}
 
 	public function index(){
-		$notices = $this->notice->all();
-		$categories = Category::all();
+		$request = new Request();
 
-		return view('site.notices.index', compact('notices', 'categories'));
+		$page = $request->input('page') ?? 1;
+		$pages = ceil($this->notice->count() / config('paginate.limit'));
+
+		$notices = $this->notice->search($page);
+		$categories = Category::all();		
+
+		return view('site.notices.index', compact('notices', 'categories', 'pages'));
 	}
 
 	public function show($slug){

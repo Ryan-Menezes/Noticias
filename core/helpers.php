@@ -7,6 +7,7 @@ use Src\Classes\{
 	Validator,
 	Auth
 };
+use Src\Classes\SiteMap\SiteMap;
 
 if(!function_exists('config')){
 	function config(string $config){
@@ -162,6 +163,20 @@ if(!function_exists('abort')){
 
 		require __DIR__ . '/../storage/framework/views/error.php';
 		die();
+	}
+}
+
+if(!function_exists('sitemap')){
+	function sitemap(string $filename, array $urls) : void{
+		$sitemap = new SiteMap();
+
+		foreach($urls as $url){
+			if(array_key_exists('loc', $url) && array_key_exists('priority', $url) && !in_array('', $url)){
+				$sitemap->addUrl($url['loc'], $url['priority']);
+			}
+		}
+
+		$sitemap->generate($filename);
 	}
 }
 

@@ -1,4 +1,4 @@
 <?php
 return [
-	'name' => md5('framework')
+	'name' => md5(config('app.name') . url())
 ];
