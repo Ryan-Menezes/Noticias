@@ -110,15 +110,18 @@ class Mail{
      * @return void
      */
     private static function setHeader() : void{
-        if(is_array(self::$bcc))
-            self::$bcc = implode(',', self::$bcc);
-
         if(is_array(self::$from))
             self::$from = implode(',', self::$from);
 
+        if(is_array(self::$bcc))
+            self::$bcc = implode(',', self::$bcc);
+
         self::$header  = "MIME-Version: 1.0\r\n";
         self::$header .= "Content-Type: " . self::$contentType . "; charset=" . self::$charset . "\r\n";
-        self::$header .= "Bcc: " . self::$bcc . "\r\n";
+
+        if(!empty(self::$bcc))
+            self::$header .= "Bcc: " . self::$bcc . "\r\n";
+
         self::$header .= "From: " . self::$from . "\r\n";
         self::$header .= "X-Mailer: php\r\n";
     }
@@ -127,18 +130,12 @@ class Mail{
      * Method sends the email
      * 
      * @param string
-     * @param string
-     * @param array
      * 
      * @return bool
      */
-    public static function send(string $to, string $view = null, array $params = []) : bool{
-        if(!empty($view) && !is_null($view)){
-            self::message(view($view, $params));
-        }
-
+    public static function send(string $to) : bool{
         self::setHeader();
 
-        return mail($to, self::$subject, self::$message, self::$header);
+        return mail(self::$to, self::$subject, self::$message, self::$header);
     }
 }

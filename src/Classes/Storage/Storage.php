@@ -38,7 +38,7 @@ class Storage{
 	  *
 	  * @return void
 	  */
-	public function delete(string $filename) : void{
+	public static function delete(string $filename) : void{
 		if(self::exists($filename)){
 			unlink(self::dir() . '/' . $filename);
 		}

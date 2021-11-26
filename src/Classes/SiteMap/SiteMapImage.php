@@ -21,7 +21,7 @@ class SiteMapImage{
      * 
      * return \Src\Classes\SiteMap\SiteMap
      */
-    public function addUrl(string $loc, string $image_loc, string $image_caption, string $image_geo_location, string $image_title) : SiteMapImage{
+    public function addUrl(string $image_loc, string $image_caption, string $image_geo_location, string $image_title) : SiteMapImage{
         array_push($this->urls, [
             'image:image' => [
                 'image:loc'             => $image_loc,
@@ -35,6 +35,43 @@ class SiteMapImage{
     }
 
     /**
+     * Render XML
+     * 
+     * return void
+     */
+    private function renderXML() : void{
+        $this->xml  = '<?xml version="1.0" encoding="UTF-8"?>';
+        $this->xml .= '<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9" xmlns:image="http://www.google.com/schemas/sitemap-image/1.1">';
+        $this->xml .= '<url>';
+        $this->xml .= "<loc>{$this->location}</loc>";
+
+        foreach($this->urls as $url){
+            foreach($url as $key => $value){
+                $this->xml .= "<{$key}>";
+                
+                foreach($value as $tag => $val){
+                    $this->xml .= "<{$tag}>{$val}</{$tag}>";
+                }
+                
+                $this->xml .= "</{$key}>";
+            }
+        }
+
+        $this->xml .= '</url>';
+        $this->xml .= '</urlset>';
+    }
+
+    /**
+     * Return XML
+     * 
+     * return string
+     */
+    public function xml() : string{
+        $this->renderXML();
+        return $this->xml;
+    }
+
+    /**
      * Generate the sitemap file
      * 
      * @param string
@@ -43,27 +80,7 @@ class SiteMapImage{
      */
     public function generate(string $filename) : void{
         $filename = dirname(__DIR__, 3) . '/' . trim($filename, '/');
-
-        $xml  = '<?xml version="1.0" encoding="UTF-8"?>';
-        $xml .= '<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9" xmlns:image="http://www.google.com/schemas/sitemap-image/1.1">';
-        $xml .= '<url>';
-        $xml .= "<loc>{$this->location}</loc>";
-
-        foreach($this->urls as $url){
-            foreach($url as $key => $value){
-                $xml .= "<{$key}>";
-                
-                foreach($value as $tag => $val){
-                    $xml .= "<{$tag}>{$val}</{$tag}>";
-                }
-                
-                $xml .= "</{$key}>";
-            }
-        }
-
-        $xml .= '</url>';
-        $xml .= '</urlset>';
         
-        file_put_contents($filename, $xml);
+        file_put_contents($filename, $this->xml());
     }
 }

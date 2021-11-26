@@ -13,7 +13,8 @@ use App\Controllers\Panel\{
 use App\Controllers\Site\{
 	SiteController,
 	NoticeController as NoticeControllerSite,
-	CategoryController as CategoryControllerSite
+	CategoryController as CategoryControllerSite,
+	SiteMapController
 };
 use App\Middlewares\Authenticate;
 
@@ -78,12 +79,24 @@ Route::group(['prefix' => 'painel'], function(){
 Route::group(['prefix' => '/'], function(){
 	Route::get('/', [SiteController::class, 'index'])->name('site');
 
+	// ROUTE NOTICES
 	Route::group(['prefix' => 'noticias'], function(){
 		Route::get('/', [NoticeControllerSite::class, 'index'])->name('site.notices');
 		Route::get('/{slug}', [NoticeControllerSite::class, 'show'])->name('site.notices.show');
 	});
 
+	// ROUTE CATEGORIES
 	Route::group(['prefix' => 'categorias'], function(){
 		Route::get('/{slug}', [CategoryControllerSite::class, 'show'])->name('site.categories.show');
+	});
+
+	// ROUTE SITEMAP
+	Route::group(['prefix' => 'sitemap'], function(){
+		Route::get('/', [SiteMapController::class, 'index'])->name('site.sitemap');
+	});
+
+	// ROUTE SITEMAP-IMAGES
+	Route::group(['prefix' => 'sitemap-images'], function(){
+		Route::get('/', [SiteMapController::class, 'images'])->name('site.sitemap-images');
 	});
 });

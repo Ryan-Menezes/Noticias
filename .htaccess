@@ -1,9 +1,9 @@
+Options All -Indexes -Multiviews
+DirectoryIndex public/index.php
 Header add Access-Control-Allow-Origin "*" 
 
 <IfModule mod_rewrite.c>
 	RewriteEngine On
-	Options All -Indexes -Multiviews
-	DirectoryIndex public/index.php
 
 	# ROUTER WWW Redirect.
 	#RewriteCond %{HTTP_HOST} !^www\. [NC]

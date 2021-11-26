@@ -7,7 +7,10 @@ use Src\Classes\{
 	Validator,
 	Auth
 };
-use Src\Classes\SiteMap\SiteMap;
+use Src\Classes\SiteMap\{
+	SiteMap,
+	SiteMapImage
+};
 
 if(!function_exists('config')){
 	function config(string $config){
@@ -63,7 +66,7 @@ if(!function_exists('url')){
 		$url = trim(config('app.url'), '/');
 		$route = trim($route, '/');
 
-		return $url . '/' . $route;
+		return str_ireplace("\\", '/', $url . '/' . $route);
 	}
 }
 
@@ -167,16 +170,62 @@ if(!function_exists('abort')){
 }
 
 if(!function_exists('sitemap')){
-	function sitemap(string $filename, array $urls) : void{
+	function sitemap(array $urls, bool $generateFile = true) : string{
+		$filename = config('sitemap.filename');
 		$sitemap = new SiteMap();
 
 		foreach($urls as $url){
-			if(array_key_exists('loc', $url) && array_key_exists('priority', $url) && !in_array('', $url)){
-				$sitemap->addUrl($url['loc'], $url['priority']);
+			if(array_key_exists('loc', $url) && array_key_exists('changefreq', $url) && array_key_exists('priority', $url) && !in_array('', $url)){
+				$sitemap->addUrl($url['loc'],  $url['changefreq'], $url['priority']);
 			}
 		}
 
-		$sitemap->generate($filename);
+		if($generateFile)
+			$sitemap->generate($filename);
+
+		return $sitemap->xml();
+	}
+}
+
+if(!function_exists('sitemapImages')){
+	function sitemapImages(bool $generateFile = true) : string{
+		$filename = config('sitemap.images.filename');
+		$directories = config('sitemap.images.directories');
+		$global = dirname(__DIR__, 1);
+		$sitemap = new SiteMapImage(url());
+		$extensions = [
+			'jpg',
+			'jpeg',
+			'png',
+			'gif',
+			'bmp',
+			'svg',
+			'psd',
+			'tiff',
+			'raw',
+			'webp',
+			'exif'	
+		];
+
+		foreach($directories as $directory){
+			$dir = $global . '/' . trim($directory, '/');
+
+			if(is_dir($dir)){
+				foreach(scandir($dir) as $d){
+					if(in_array(pathinfo($d, PATHINFO_EXTENSION), $extensions)){
+						$fname = pathinfo($d, PATHINFO_FILENAME);
+
+						$sitemap->addUrl(url($directory . '/' . $d), $fname, 'São Paulo, Brazil', $fname);
+					}
+				}
+			}
+		}
+
+
+		if($generateFile)
+			$sitemap->generate($filename);
+
+		return $sitemap->xml();
 	}
 }
 
