@@ -19,7 +19,7 @@
                     <p class="post-title">{{ $notice->title }}</p>
                     <div class="d-flex align-items-center">
                         <span class="post-date mr-30">{{ $notice->createdAtFormat }}</span>
-                        <span class="post-date">{{ isset($notice->author) ? $notice->author->name : null }}</span>
+                        <span class="post-date"><i class="fa fa-user"></i> {{ isset($notice->author) ? $notice->author->name : null }}</span>
                     </div>
                 </div>
             </div>
