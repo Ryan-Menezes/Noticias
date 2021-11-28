@@ -1,8 +1,12 @@
 @extends('templates.site')
 
 @section('title', 'Início')
+@section('url', route('site'))
 @section('keywords', config('app.keywords'))
 @section('description', config('app.description'))
+@section('image', public_path('assets/img/site/core-img/favicon.ico'))
+@section('image_width', 200)
+@section('image_height', 200)
 
 @section('container')
 <!-- ##### Breaking News Area Start ##### -->
@@ -67,7 +71,7 @@
                             <div class="blog-content">
                                 <span class="post-date">{{ $notices[$i]->updatedAtFormat }}</span>
                                 <a href="{{ route('site.notices.show', ['slug' => $notices[$i]->slug]) }}" class="post-title" title="{{ $notices[$i]->title }}">{{ $notices[$i]->title }}</a>
-                                <span class="post-author"><small>{{ $notices[$i]->author->name }}</small></span>
+                                <span class="post-author"><small>{{ isset($notices[$i]->author) ? $notices[$i]->author->name : null }}</small></span>
                             </div>
                         </div>
                     </div>
@@ -96,7 +100,7 @@
                     <div class="blog-content">
                         <span class="post-date">{{ $notices[$i]->createdAtFormat }}</span>
                         <a href="{{ route('site.notices.show', ['slug' => $notices[$i]->slug]) }}" class="post-title" title="{{ $notices[$i]->title }}">{{ $notices[$i]->title }}</a>
-                        <span class="post-author"><small>{{ $notices[$i]->author->name }}</small></span>
+                        <span class="post-author"><small>{{ isset($notices[$i]->author) ? $notices[$i]->author->name : null }}</small></span>
                     </div>
                 </div>
             </div>

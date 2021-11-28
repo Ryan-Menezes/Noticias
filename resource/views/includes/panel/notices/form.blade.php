@@ -63,7 +63,12 @@
 		
 		@if(isset($notice))
 			@foreach(json_decode($notice->content)->elements as $element)
-				@if($element->type == 'paragraph')
+				@if($element->type == 'title')
+					@include('includes.components.form.titleeditor', [
+						'value' => $element->content,
+						'tag' => $element->tag
+					])
+				@elseif($element->type == 'paragraph')
 					@include('includes.components.form.texteditor', [
 						'name' => 'paragraphs[]',
 						'class' => 'paragraph draggable required',
@@ -88,6 +93,8 @@
 				@endif
 			@endforeach
 		@else
+			@include('includes.components.form.titleeditor')
+
 			@include('includes.components.form.texteditor', [
 				'name' => 'paragraphs[]',
 				'class' => 'paragraph',
@@ -105,6 +112,8 @@
 
 	<div class="row text-center mb-5">
 		<div class="col-md-12">
+			<button type="button" class="btn border" data-urlajax="{{ route('panel.notices.component', ['name' => 'form.titleeditor']) }}">Adicionar um Titulo <i class="fas fa-title"></i></button>
+
 			<button type="button" class="btn border" data-name="paragraphs[]" data-class="paragraph" data-title="Digite o texto do parágrafo..." data-urlajax="{{ route('panel.notices.component', ['name' => 'form.texteditor']) }}">Adicionar parágrafo <i class="fas fa-paragraph"></i></button>
 
 			<button type="button" class="btn border" data-urlajax="{{ route('panel.notices.component', ['name' => 'form.imageeditor']) }}">Adicionar imagem <i class="fas fa-image"></i></button>

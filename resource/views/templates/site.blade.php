@@ -1,12 +1,32 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="{{ config('app.lang') }}">
 <head>
     <meta charset="UTF-8">
     <meta name="keywords" content="@yield('keywords')">
     <meta name="description" content="@yield('description')">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-    <!-- The above 4 meta tags *must* come first in the head; any other head content must come *after* these tags -->
+
+    <meta property="og:url" content="@yield('url')" />
+    <meta property="og:type" content="website" />
+    <meta property="og:title" content="{{ config('app.name') }} | @yield('title')" />
+    <meta property="og:description" content="@yield('description')" />
+    <meta property="og:image" content="@yield('image')" />
+    <meta property="og:image:alt" content="{{ config('app.name') }} | @yield('title')" />
+    <meta property="og:image:width" content="@yield('image_width')" /> 
+    <meta property="og:image:height" content="@yield('image_height')" /> 
+    <meta property="og:site_name" content="{{ config('app.name') }}" /> 
+    <meta property="og:locale" content="{{ config('app.lang') }}" />
+    
+    <meta property="article:author" content="{{ config('social.facebook') }}" /> 
+    <meta property="article:publisher" content="{{ config('social.facebook') }}" /> 
+    <meta property="twitter:card" content="summary_large_image" /> 
+    <meta property="twitter:domain" content="{{ config('app.domain') }}" /> 
+    <meta property="twitter:title" content="{{ config('app.name') }} | @yield('title')" /> 
+    <meta property="twitter:description" content="@yield('description')" /> 
+    <meta property="twitter:image" content="@yield('image')" /> 
+    <meta property="twitter:url" content="@yield('url')" />
+    <meta name="twitter:card" content="summary" />
 
     <!-- Title -->
     <title>{{ config('app.name') }} | @yield('title')</title>
@@ -16,6 +36,7 @@
 
     <!-- Stylesheet -->
     <link rel="stylesheet" href="{{ public_path('assets/css/site/style.css') }}">
+    @yield('styles')
 </head>
 
 <body>
@@ -54,7 +75,7 @@
                             </div>
 
                             <!-- Nav Start -->
-                            <div class="classynav">
+                            <div class="classynav mr-4">
                                 <ul>
                                     <li><a href="{{ route('site') }}" title="Página Inicial">Início</a></li>
                                     <li><a href="{{ route('site.notices') }}" title="Notícias Atuais">Notícias Atuais</a></li>
@@ -96,9 +117,9 @@
                         <!-- Footer Nav -->
                         <div class="footer-nav">
                             <ul>
-                                <li><a href="#">Contact Us</a></li>
-                                <li><a href="#">Closed Captioning</a></li>
-                                <li><a href="#">Site Map</a></li>
+                                <li><a href="{{ route('site') }}" title="Página Inicial">Início</a></li>
+                                <li><a href="{{ route('site.notices') }}" title="Página de Notícias">Notícias</a></li>
+                                <li><a href="{{ route('site.sitemap') }}" title="Mapa do Site">SiteMap</a></li>
                             </ul>
                         </div>
                         <!-- Social Info -->
@@ -111,10 +132,8 @@
                             <a href="#" data-toggle="tooltip" data-placement="top" title="linkedin"><i class="fa fa-linkedin" aria-hidden="true"></i></a>
                         </div>
 
-                        <p class="mb-15">Nullam lacinia ex eleifend orci porttitor, suscipit interdum augue condimentum. Etiam pretium turpis eget nibh laoreet iaculis. Proin ac urna at lectus volutpat lobortis. Vestibulum venenatis iaculis diam vitae lobortis. Donec tincidunt viverra elit, sed consectetur est pr etium ac. Mauris nec mauris tellus. </p>
-
                         <!-- Copywrite Text -->
-                        <p class="copywrite-text"><a href="#">{{ date('Y') }} All rights reserved | This template is made with <i class="fa fa-heart-o" aria-hidden="true"></i> by <a href="https://colorlib.com" target="_blank">Colorlib</a></p>
+                        <p class="copywrite-text">{{ config('app.name') }} &copy; {{ date('Y') }} Todos os direitos reservados | Site desenvolvido por <a href="https://ryan-menezes.github.io/" target="_blank" title="Portfólio do Desenvolvedor">Ryan Menezes</a></p>
                     </div>
                 </div>
             </div>
@@ -129,5 +148,6 @@
     <script type="text/javascript" src="{{ public_path('assets/js/libs/bootstrap/bootstrap.min.js') }}"></script>
     <script type="text/javascript" src="{{ public_path('assets/js/libs/plugins/plugins.js') }}"></script>
     <script type="text/javascript" src="{{ public_path('assets/js/site/active.js') }}"></script>
+    @yield('scripts')
 </body>
 </html>

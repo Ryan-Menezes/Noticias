@@ -24,7 +24,9 @@ class NoticeController extends Controller{
 		$pages = ceil($this->notice->count() / config('paginate.limit'));
 
 		$notices = $this->notice->search($page);
-		$categories = Category::all();		
+		$categories = Category::all();
+
+		if(count($notices) == 0) abort(404);
 
 		return view('site.notices.index', compact('notices', 'categories', 'pages'));
 	}

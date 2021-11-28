@@ -2,6 +2,7 @@
 return [
 	'name' 			=> 'NewsBox',
 	'url' 			=> 'http://www.noticias.com/',
+	'domain' 		=> 'www.noticias.com',
 	'timezone' 		=> 'America/Sao_Paulo',
 	'lang' 			=> 'pt-br',
 	'debug'			=> true,

@@ -1524,6 +1524,36 @@ img {
   .newsbox-tabs-content .tab-content h6 {
     font-size: 18px; }
 
+.bg-twitter{
+  background-color: #2AA9E0;
+  color: white;
+  padding: 3px 5px;
+  font-weight: bold;
+  font-size: 14px;
+}
+.bg-twitter:hover,
+.bg-twitter:focus{
+  transform: none!important;
+  width: auto!important;
+  height: auto!important;
+  color: white!important;
+  padding: 3px 5px!important;
+  font-size: 14px!important;
+}
+.post-details-content .bold{
+  font-weight: bold!important;
+}
+.post-details-content.italic{
+  font-style: italic!important;
+}
+.post-details-content .underline{
+  text-decoration: underline!important;
+}
+.post-details-content a:hover{
+  text-decoration: underline;
+}
+
+
 /* ====== The End ====== */
 
 /*# sourceMappingURL=style.css.map */
