@@ -48,9 +48,9 @@ $(document).ready(function(){
         let data = $(this).data()
         let element = $(this).parent().siblings('textarea')
         let types = {
-            bold:       '<span class="bold">Texto Aqui</span>',
-            italic:     '<span class="italic">Texto Aqui</span>',
-            underline:  '<span class="underline">Texto Aqui</span>',
+            bold:       '<strong>Texto Aqui</strong>',
+            italic:     '<em>Texto Aqui</em>',
+            underline:  '<u>Texto Aqui</u>',
             link:       '<a href="Link de Redirecionamento" target="_blank" title="Titulo do Link">Texto Aqui</a>'
         }
 

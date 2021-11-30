@@ -19,7 +19,7 @@ class SiteMapImage{
      * @param string
      * @param string
      * 
-     * return \Src\Classes\SiteMap\SiteMap
+     * @return \Src\Classes\SiteMap\SiteMap
      */
     public function addUrl(string $image_loc, string $image_caption, string $image_geo_location, string $image_title) : SiteMapImage{
         array_push($this->urls, [
@@ -37,7 +37,7 @@ class SiteMapImage{
     /**
      * Render XML
      * 
-     * return void
+     * @return void
      */
     private function renderXML() : void{
         $this->xml  = '<?xml version="1.0" encoding="UTF-8"?>';
@@ -64,9 +64,9 @@ class SiteMapImage{
     /**
      * Return XML
      * 
-     * return string
+     * @return string|null
      */
-    public function xml() : string{
+    public function xml() : ?string{
         $this->renderXML();
         return $this->xml;
     }
@@ -76,7 +76,7 @@ class SiteMapImage{
      * 
      * @param string
      * 
-     * return void
+     * @return void
      */
     public function generate(string $filename) : void{
         $filename = dirname(__DIR__, 3) . '/' . trim($filename, '/');

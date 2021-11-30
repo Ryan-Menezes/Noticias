@@ -17,9 +17,11 @@
     <meta property="og:image:height" content="@yield('image_height')" /> 
     <meta property="og:site_name" content="{{ config('app.name') }}" /> 
     <meta property="og:locale" content="{{ config('app.lang') }}" />
+    {{-- <meta property="og:app_id" content="" /> --}}
+    {{-- <meta property="fb:pages" content="" /> --}}
     
-    <meta property="article:author" content="{{ config('social.facebook') }}" /> 
-    <meta property="article:publisher" content="{{ config('social.facebook') }}" /> 
+    <meta property="article:author" content="{{ config('app.social.facebook') }}" /> 
+    <meta property="article:publisher" content="{{ config('app.social.facebook') }}" /> 
     <meta property="twitter:card" content="summary_large_image" /> 
     <meta property="twitter:domain" content="{{ config('app.domain') }}" /> 
     <meta property="twitter:title" content="{{ config('app.name') }} | @yield('title')" /> 
@@ -27,6 +29,8 @@
     <meta property="twitter:image" content="@yield('image')" /> 
     <meta property="twitter:url" content="@yield('url')" />
     <meta name="twitter:card" content="summary" />
+    {{-- <meta name="twitter:site" content="@news" /> --}}
+    {{-- <meta name="twitter:creator" content="@news" /> --}}
 
     <!-- Title -->
     <title>{{ config('app.name') }} | @yield('title')</title>

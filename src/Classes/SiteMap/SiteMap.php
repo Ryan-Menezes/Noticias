@@ -18,7 +18,7 @@ class SiteMap{
      * @param string
      * @param string
      * 
-     * return \Src\Classes\SiteMap\SiteMap
+     * @return \Src\Classes\SiteMap\SiteMap
      */
     public function addUrl(string $loc, string $changefreq, string $priority = '1.0') : SiteMap{
         array_push($this->urls, [
@@ -34,7 +34,7 @@ class SiteMap{
     /**
      * Render XML
      * 
-     * return void
+     * @return void
      */
     private function renderXML() : void{
         $this->xml  = '<?xml version="1.0" encoding="UTF-8"?>';
@@ -54,9 +54,9 @@ class SiteMap{
     /**
      * Return XML
      * 
-     * return string
+     * @return string|null
      */
-    public function xml() : string{
+    public function xml() : ?string{
         $this->renderXML();
         return $this->xml;
     }
@@ -66,7 +66,7 @@ class SiteMap{
      * 
      * @param string
      * 
-     * return void
+     * @return void
      */
     public function generate(string $filename) : void{
         $filename = dirname(__DIR__, 3) . '/' . trim($filename, '/');

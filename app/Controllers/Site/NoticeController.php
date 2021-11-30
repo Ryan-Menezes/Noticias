@@ -33,6 +33,9 @@ class NoticeController extends Controller{
 
 	public function show($slug){
 		$notice = $this->notice->where('slug', $slug)->firstOrFail();
+		$notice->visits++;
+		$notice->save();
+
 		$categories = Category::all();
 
 		return view('site.notices.show', compact('notice', 'categories'));
