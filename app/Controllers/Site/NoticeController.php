@@ -32,7 +32,7 @@ class NoticeController extends Controller{
 	}
 
 	public function show($slug){
-		$notice = $this->notice->where('slug', $slug)->firstOrFail();
+		$notice = $this->notice->where('visible', true)->where('slug', $slug)->firstOrFail();
 		$notice->visits++;
 		$notice->save();
 

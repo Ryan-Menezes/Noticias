@@ -1524,21 +1524,32 @@ img {
   .newsbox-tabs-content .tab-content h6 {
     font-size: 18px; }
 
+.bg-whatsapp{
+  background-color: #57BA63;
+  color: white;
+  padding: 4px 8px;
+  font-weight: bold;
+  font-size: 12px;
+}
 .bg-twitter{
   background-color: #2AA9E0;
   color: white;
-  padding: 3px 5px;
+  padding: 4px 8px;
   font-weight: bold;
-  font-size: 14px;
+  font-size: 12px;
 }
+
+.bg-whatsapp:hover,
+.bg-whatsapp:focus,
 .bg-twitter:hover,
 .bg-twitter:focus{
   transform: none!important;
   width: auto!important;
   height: auto!important;
   color: white!important;
-  padding: 3px 5px!important;
-  font-size: 14px!important;
+  padding: 4px 8px!important;
+  font-size: 12px!important;
+  font-weight: bold!important;
 }
 .post-details-content .bold{
   font-weight: bold!important;

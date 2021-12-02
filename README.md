@@ -1,5 +1,5 @@
 # Notícias
-Um site de notícias
+Um site para diversos tipos de notícias.
 ## Configuração
 Tenha o [Composer](https://getcomposer.org/) instalado em sua máquina e através de seu terminal entre no diretório do projeto e rode o comando "composer update":
 ```sh

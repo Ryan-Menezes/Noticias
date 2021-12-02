@@ -35,8 +35,9 @@
         <div class="row justify-content-center">
             <div class="col-12 col-lg-8 mb-5">
                 <!-- Your share button code -->
-                <div class="fb-share-button mt-1" data-href="{{ route('site.notices.show', ['slug' => $notice->slug]) }}" data-layout="button" data-size="large" title="Facebook"></div>
-                <a href="https://twitter.com/intent/tweet?url={{ route('site.notices.show', ['slug' => $notice->slug]) }}&text={{ $notice->title }}" class="btn btn-sm bg-twitter mt-0 mb-2" target="_blank" title="twitter"><i class="fa fa-twitter"></i> Share</a>
+                <div class="fb-share-button mt-1" data-href="{{ urlencode(route('site.notices.show', ['slug' => $notice->slug])) }}" data-layout="button" data-size="large" title="Compartilhe no Facebook"></div>
+                <a href="https://twitter.com/intent/tweet?url={{ urlencode(route('site.notices.show', ['slug' => $notice->slug])) }}&text={{ $notice->title }}" class="btn btn-sm bg-twitter mt-0 mb-2 share-btn" target="_blank" title="Compartilhe no Twitter"><i class="fa fa-twitter"></i> Share</a>
+                <a href="https://api.whatsapp.com/send?text={{ urlencode($notice->title . ': ' . route('site.notices.show', ['slug' => $notice->slug])) }}" target="_blank" class="btn btn-sm bg-whatsapp mt-0 mb-2 share-btn" title="Compartilhe no WhatsApp"><i class="fa fa-whatsapp"></i> Share</a>
 
                 <!-- Load Facebook SDK for JavaScript -->
                 <div id="fb-root"></div>
@@ -69,6 +70,7 @@
 
 @section('scripts')
 <script type="text/javascript">
+    // Facebook
     (function(d, s, id) {
         var js, fjs = d.getElementsByTagName(s)[0];
         if (d.getElementById(id)) return;
@@ -76,5 +78,14 @@
         js.src = "https://connect.facebook.net/en_US/sdk.js#xfbml=1&version=v3.0";
         fjs.parentNode.insertBefore(js, fjs);
     }(document, 'script', 'facebook-jssdk'));
+
+    // Outros compartilhamentos
+    window.document.addEventListener("DOMContentLoaded", function() {
+        $('.share-btn').click(function(){
+            event.preventDefault()
+
+            window.open(this.href, '_blank', 'width=700,height=350')
+        })
+    }, false);
 </script>
 @endsection
