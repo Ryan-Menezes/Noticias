@@ -2,8 +2,9 @@
 <html lang="{{ config('app.lang') }}">
 <head>
 	<!-- Required meta tags -->
-	<meta charset="utf-8">
+	<meta http-equiv="Content-Type" content="text/html; charset={{ config('app.charset') }}" />
 	<meta name="viewport" content="width=device-width, initial-scale=1">
+	<meta name="robots" content="noindex" />
 
 	<!-- jQuery CSS -->
 	<link rel="stylesheet" type="text/css" href="{{ public_path('assets/js/libs/jquery/jquery-ui/jquery-ui.min.css') }}">

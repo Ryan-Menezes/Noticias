@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html lang="{{ config('app.lang') }}">
 <head>
-    <meta charset="UTF-8">
+    <meta http-equiv="Content-Type" content="text/html; charset={{ config('app.charset') }}" />
     <meta name="keywords" content="@yield('keywords')">
     <meta name="description" content="@yield('description')">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">

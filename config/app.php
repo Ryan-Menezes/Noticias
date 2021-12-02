@@ -4,6 +4,7 @@ return [
 	'url' 			=> 'http://www.noticias.com/',
 	'domain' 		=> 'www.noticias.com',
 	'timezone' 		=> 'America/Sao_Paulo',
+	'charset'		=> 'utf-8',
 	'lang' 			=> 'pt-br',
 	'debug'			=> true,
 	'description' 	=> 'O melhor site de notícia é na NewsBox' ,
