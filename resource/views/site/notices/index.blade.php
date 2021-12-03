@@ -19,7 +19,7 @@
                     @isset($category)
                     <p class="tag"><span>{{ $category->name }}</span></p>
                     @endisset
-                    <a href="{{ route('site.notices.show', ['slug' => $notices[0]->slug]) }}" class="post-title" title="{{ $notices[0]->title }}">{{ $notices[0]->title }}</a>
+                    <h1 class="post-title"><a href="{{ route('site.notices.show', ['slug' => $notices[0]->slug]) }}" title="{{ $notices[0]->title }}">{{ $notices[0]->title }}</a></h1>
                     <p>{!! str_ireplace("\n", '<br>', $notices[0]->description) !!}</p>
                     <span class="post-date">{{ $notices[0]->createdAtFormat }}</span>
                 </div>

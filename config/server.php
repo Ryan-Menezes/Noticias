@@ -5,7 +5,7 @@ return [
 		'401' => 'Não Autorizado', 								// Unauthorized
 		'402' => 'Pagamento Necessário',						// Payment Required
 		'403' => 'Proibido',									// Forbidden
-		'404' => 'Não Encontrado',								// Not Found
+		'404' => 'Página Não Encontrada',						// Not Found
 		'405' => 'Método não Permitido',						// Method Not Allowed
 		'406' => 'Não Aceito',									// Not Acceptable
 		'407' => 'Autenticação de Proxy Necessária',			// Proxy Authentication Required

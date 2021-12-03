@@ -16,10 +16,9 @@
             <div class="col-12 col-lg-8">
                 <!-- Post Content -->
                 <div class="post-content">
-                    <p class="post-title">{{ $notice->title }}</p>
+                    <hj class="post-title">{{ $notice->title }}</h1>
                     <div class="d-flex align-items-center">
-                        <span class="post-date mr-30">{{ $notice->createdAtFormat }}</span>
-                        <span class="post-date mr-30"><i class="fa fa-user"></i> {{ isset($notice->author) ? $notice->author->name : config('app.name') }}</span>
+                        <span class="post-date mr-30">Escrito por <strong>{{ isset($notice->author) ? $notice->author->name : config('app.name') }}</strong> em {{ $notice->createdAtFormat }}</span>
                         <span class="post-date mr-30"><i class="fa fa-eye"></i> {{ number_format($notice->visits, 0, '', '.') }}</span>
                     </div>
                 </div>
