@@ -48,10 +48,11 @@ $(document).ready(function(){
         let data = $(this).data()
         let element = $(this).parent().siblings('textarea')
         let types = {
-            bold:       '<strong>Texto Aqui</strong>',
-            italic:     '<em>Texto Aqui</em>',
-            underline:  '<u>Texto Aqui</u>',
-            link:       '<a href="Link de Redirecionamento" target="_blank" title="Titulo do Link">Texto Aqui</a>'
+            bold:           '<strong>Texto Aqui</strong>',
+            italic:         '<em>Texto Aqui</em>',
+            underline:      '<u>Texto Aqui</u>',
+            link:           '<a href="Link de Redirecionamento" target="_blank" title="Titulo do Link" rel="nofollow">Texto Aqui</a>',
+            blockquote:     '<blockquote>Texto Aqui</blockquote>',
         }
 
         if(types[data.type] !== undefined){

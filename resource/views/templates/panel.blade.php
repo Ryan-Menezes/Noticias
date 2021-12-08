@@ -24,6 +24,9 @@
 	<link rel="stylesheet" type="text/css" href="{{ public_path('assets/css/libs/fontawesome/v4-shims.min.css') }}">
 	<link rel="stylesheet" type="text/css" href="{{ public_path('assets/css/panel/config.css') }}">
 
+	<!-- Favicon -->
+    <link rel="icon" href="{{ public_path('assets/img/site/core-img/favicon.ico') }}">
+
 	<title>{{ config('app.name') }} | @yield('title')</title>
 </head>
 <body>

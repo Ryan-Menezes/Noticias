@@ -5,6 +5,7 @@
 		<button type="button" class="btn btn-sm border textarea-editor-btn" title="Itálico" data-type="italic"><i class="fas fa-italic"></i></button>
 		<button type="button" class="btn btn-sm border textarea-editor-btn" title="Sublinhado" data-type="underline"><i class="fas fa-underline"></i></button>
 		<button type="button" class="btn btn-sm border textarea-editor-btn" title="Link" data-type="link"><i class="fas fa-link"></i></button>
+		<button type="button" class="btn btn-sm border textarea-editor-btn" title="Citação" data-type="blockquote"><i class="fas fa-quote-left"></i></button>
 
 		<button type="button" class="btn btn-sm btn-danger btn-remove-element float-end" title="Remover Elemento"><i class="fas fa-trash-alt"></i></button>
 	</div>
