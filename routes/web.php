@@ -108,6 +108,7 @@ Route::group(['prefix' => '/'], function(){
 			// ROUTE COMMENTS
 			Route::group(['prefix' => 'comentarios'], function(){
 				Route::post('/enviar', [CommentControllerSite::class, 'store'])->name('site.notices.comments.store');
+				Route::post('/{id}/responder', [CommentControllerSite::class, 'response'])->name('site.notices.comments.response');
 			});
 		});
 	});

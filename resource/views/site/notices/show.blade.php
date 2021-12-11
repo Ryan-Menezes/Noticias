@@ -60,7 +60,7 @@
                         @endif
                     @endforeach
 
-                    <div class="post-a-comment-area mb-30 clearfix">
+                    <div class="post-a-comment-area mb-30 clearfix" id="commentsarea">
                         <h2 class="mb-50">Faça um Comentário:</h2>
 
                         @include('includes.messages')
@@ -101,7 +101,7 @@
                                             <div class="d-flex">
                                                 <h3 class="post-author">{{ $comment->name }}</h3>
                                                 <span class="post-date"><strong>{{ $comment->createdAtFormat }}</strong></span>
-                                                <a href="#" class="reply">Responder</a>
+                                                <a href="javascript:void(0)" class="reply" data-startresponse="form-comment-{{ $comment->id }}">Responder</a>
                                             </div>
                                             <p>{!! str_ireplace("\n", '<br>', $comment->content) !!}</p>
                                         </div>
@@ -118,7 +118,7 @@
                                                     <div class="d-flex">
                                                         <h3 class="post-author">{{ $subcomment->name }}</h3>
                                                         <span class="post-date"><strong>{{ $subcomment->createdAtFormat }}</strong></span>
-                                                        <a href="#" class="reply">Responder</a>
+                                                        <a href="javascript:void(0)" class="reply" data-startresponse="form-comment-{{ $comment->id }}">Responder</a>
                                                     </div>
                                                     <p>{!! str_ireplace("\n", '<br>', $subcomment->content) !!}</p>
                                                 </div>
@@ -127,6 +127,23 @@
                                         @endforeach
                                     </ol>
                                     @endif
+                                    <form id="form-comment-{{ $comment->id }}" action="{{ route('site.notices.comments.response', ['slug' => $notice->slug, 'id' => $comment->id]) }}" method="POST" class="form-response form-validate" style="display: none!important;">
+                                        <div class="row">
+                                            <div class="col-12 col-lg-6 mt-4">
+                                                <input type="text" class="form-control" id="name" name="name" placeholder="Nome" class="required">
+                                            </div>
+                                            <div class="col-12 col-lg-6 mt-4">
+                                                <input type="email" class="form-control" id="email" name="email" placeholder="E-Mail" class="required email">
+                                            </div>
+                                            <div class="col-12 mt-4">
+                                                <textarea name="content" class="form-control" id="message" cols="30" rows="5" placeholder="Mensagem" class="required"></textarea>
+                                            </div>
+                                            <div class="col-12 mt-4">
+                                                <button type="submit" class="btn btn-danger">Responder</button>
+                                                <button type="button" class="btn btn-dark" data-cancelresponse="form-comment-{{ $comment->id }}">Cancelar</button>
+                                            </div>
+                                        </div>
+                                    </form>
                                 </li>
                                 @endforeach
                             </ol>
@@ -162,5 +179,22 @@
             window.open(this.href, '_blank', 'width=700,height=350')
         })
     }, false);
+
+    // Script para responder um comentário
+    $('[data-startresponse]').click(function(){
+        $('.form-response').hide()
+
+        let data = $(this).data()
+
+        $(`#${data.startresponse}`).show()
+    })
+
+    $('[data-cancelresponse]').click(function(){
+        $('.form-response').hide()
+        
+        let data = $(this).data()
+
+        $(`#${data.cancelresponse}`).hide()
+    })
 </script>
 @endsection
