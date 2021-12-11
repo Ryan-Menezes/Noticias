@@ -13,6 +13,10 @@
 				@include('includes.components.card', ['title' => 'Notícias', 'link' => route('panel.notices'), 'class' => 'bg-danger', 'amount' => $noticesCount, 'icon' => 'fas fa-newspaper'])
 			@endif
 
+			@if(can('view.comments'))
+				@include('includes.components.card', ['title' => 'Comentários', 'link' => route('panel.comments'), 'class' => 'bg-info', 'amount' => $commentsCount, 'icon' => 'fas fa-comments'])
+			@endif
+
 			@if(can('view.categories'))
 				@include('includes.components.card', ['title' => 'Categorias', 'link' => route('panel.categories'), 'class' => 'bg-success', 'amount' => $categoriesCount, 'icon' => 'fas fa-tag'])
 			@endif

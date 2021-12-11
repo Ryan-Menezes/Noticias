@@ -89,7 +89,7 @@ class UserController extends Controller{
 			redirect(route('panel.users.edit', ['id' => $user->id]), ['success' => 'Usuário editado com sucesso']);
 		}
 
-		redirect(route('panel.users.edit'), ['error' => 'Usuário NÃO cadastrado, Ocorreu um erro no processo de cadastro!']);
+		redirect(route('panel.users.edit'), ['error' => 'Usuário NÃO editado, Ocorreu um erro no processo de edição!']);
 	}
 
 	public function destroy($id){

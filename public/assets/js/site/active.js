@@ -168,4 +168,17 @@
         new WOW().init();
     }
 
+    // Configurações do form validade
+    $('*').delegate('.form-validate', 'focus load', function(){
+        $(this).validate({
+            errorElement: 'span',
+            messages: {
+                required: 'Este campo é obrigatório',
+                email: 'Por favor entre com um email válido'
+            }
+        })
+
+        return false
+    })
+
 })(jQuery);

@@ -7,6 +7,8 @@ use Src\Classes\{
 };
 use App\Models\{
 	Notice,
+	Comment,
+	SubComment,
 	Category
 };
 

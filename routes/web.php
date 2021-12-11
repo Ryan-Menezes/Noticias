@@ -8,11 +8,14 @@ use App\Controllers\Panel\{
 	CategoryController,
 	UserController,
 	RoleController,
-	PermissionController
+	PermissionController,
+	CommentController,
+	SubCommentController
 };
 use App\Controllers\Site\{
 	SiteController,
 	NoticeController as NoticeControllerSite,
+	CommentController as CommentControllerSite,
 	CategoryController as CategoryControllerSite,
 	SiteMapController
 };
@@ -40,6 +43,22 @@ Route::group(['prefix' => 'painel', 'middleware' => Authenticate::class], functi
 		Route::get('/{id}/editar', [NoticeController::class, 'edit'])->name('panel.notices.edit');
 		Route::put('/{id}/editar/salvar', [NoticeController::class, 'update'])->name('panel.notices.update');
 		Route::delete('/{id}/deletar', [NoticeController::class, 'destroy'])->name('panel.notices.destroy');
+	});
+
+	// ROUTE COMMENTS
+	Route::group(['prefix' => 'comentarios'], function(){
+		Route::any('/', [CommentController::class, 'index'])->name('panel.comments');
+		Route::get('/{id}/editar', [CommentController::class, 'edit'])->name('panel.comments.edit');
+		Route::put('/{id}/editar/salvar', [CommentController::class, 'update'])->name('panel.comments.update');
+		Route::delete('/{id}/deletar', [CommentController::class, 'destroy'])->name('panel.comments.destroy');
+
+		// ROUTE SUBCOMMENTS
+		Route::group(['prefix' => '/{comment}/respostas'], function(){
+			Route::any('/', [SubCommentController::class, 'index'])->name('panel.comments.subcomments');
+			Route::get('/{id}/editar', [SubCommentController::class, 'edit'])->name('panel.comments.subcomments.edit');
+			Route::put('/{id}/editar/salvar', [SubCommentController::class, 'update'])->name('panel.comments.subcomments.update');
+			Route::delete('/{id}/deletar', [SubCommentController::class, 'destroy'])->name('panel.comments.subcomments.destroy');
+		});
 	});
 
 	// ROUTE CAREGORIES
@@ -82,7 +101,15 @@ Route::group(['prefix' => '/'], function(){
 	// ROUTE NOTICES
 	Route::group(['prefix' => 'noticias'], function(){
 		Route::get('/', [NoticeControllerSite::class, 'index'])->name('site.notices');
-		Route::get('/{slug}', [NoticeControllerSite::class, 'show'])->name('site.notices.show');
+
+		Route::group(['prefix' => '/{slug}'], function(){
+			Route::get('/', [NoticeControllerSite::class, 'show'])->name('site.notices.show');
+
+			// ROUTE COMMENTS
+			Route::group(['prefix' => 'comentarios'], function(){
+				Route::post('/enviar', [CommentControllerSite::class, 'store'])->name('site.notices.comments.store');
+			});
+		});
 	});
 
 	// ROUTE CATEGORIES

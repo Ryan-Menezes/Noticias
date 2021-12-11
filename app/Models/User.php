@@ -11,7 +11,7 @@ class User extends Model{
 	public function getRolesCreateAttribute(){
 		return [
 			'name' 		=> 'required|min:1|max:100',
-			'email' 	=> "required|email|unique:{$this->table},email",
+			'email' 	=> "required|email|min:1|max:100|unique:{$this->table},email",
 			'password' 	=> 'required|min:8|max:100',
 			'role'		=> 'required'
 		];
@@ -20,7 +20,7 @@ class User extends Model{
 	public function getRolesUpdateAttribute(){
 		return [
 			'name' 		=> 'required|min:1|max:100',
-			'email' 	=> "required|email|unique:{$this->table},email,{$this->email}",
+			'email' 	=> "required|email|min:1|max:100|unique:{$this->table},email,{$this->email}",
 			'password' 	=> 'min:8|max:100',
 			'role'		=> 'required'
 		];
@@ -31,6 +31,10 @@ class User extends Model{
 			'name.required' 		=> 'O preenchimento do campo nome é obrigatório!',
 			'name.min' 				=> 'O campo nome deve conter no mínimo %min% caracteres!',
 			'name.max' 				=> 'O campo nome deve conter no máximo %max% caracteres!',
+			'email.required' 		=> 'O preenchimento do campo email é obrigatório!',
+			'email.email' 			=> 'Informe um email válido!',
+			'email.min' 			=> 'O campo email deve conter no mínimo %min% caracteres!',
+			'email.max' 			=> 'O campo email deve conter no máximo %max% caracteres!',
 			'email.unique' 			=> 'Este email já está sendo utilizado, Tente outro email!',
 			'password.required' 	=> 'O preenchimento do campo nome é obrigatório!',
 			'password.min' 			=> 'O campo senha deve conter no mínimo %min% caracteres!',

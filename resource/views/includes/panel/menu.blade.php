@@ -14,6 +14,10 @@
 			<a href="{{ route('panel.notices') }}" title="Página de Notícias"><li><i class="fas fa-newspaper"></i> Notícias</li></a>
 		@endif
 
+		@if(can('view.comments'))
+			<a href="{{ route('panel.comments') }}" title="Página de Comentários"><li><i class="fas fa-comments"></i> Comentários</li></a>
+		@endif
+
 		@if(can('view.categories'))
 			<a href="{{ route('panel.categories') }}" title="Página de Categorias"><li><i class="fas fa-tag"></i> Categorias</li></a>
 		@endif

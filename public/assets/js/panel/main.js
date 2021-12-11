@@ -41,7 +41,7 @@ $(document).ready(function(){
         })
 
         return false
-    })   
+    })
 
     // Configurações do textarea
     $('*').delegate('.textarea-editor-btn[data-type]', 'click', function(){

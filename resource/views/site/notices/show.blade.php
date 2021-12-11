@@ -47,7 +47,7 @@
                 <div class="post-details-content mb-100">
                     @foreach(json_decode($notice->content)->elements as $element)
                         @if($element->type == 'title')
-                            <{{ $element->tag }} class="mb-4">{{ $element->content }}</{{ $element->tag }}>
+                            <{{ $element->tag }} class="mb-4">{!! $element->content !!}</{{ $element->tag }}>
                         @elseif($element->type == 'paragraph')
                             <p class="mb-4">{!! str_ireplace("\n", '<br>', $element->content) !!}</p>
                         @elseif($element->type == 'youtube')
@@ -59,6 +59,82 @@
                             <img src="{{ url('storage/app/public/' . $element->src) }}" class="img-fluid mb-4" alt="{{ $element->title }}" title="{{ $element->title }}">
                         @endif
                     @endforeach
+
+                    <div class="post-a-comment-area mb-30 clearfix">
+                        <h2 class="mb-50">Faça um Comentário:</h2>
+
+                        @include('includes.messages')
+
+                        <!-- Reply Form -->
+                        <div class="contact-form-area">
+                            <form action="{{ route('site.notices.comments.store', ['slug' => $notice->slug]) }}" method="POST" class="form-validate">
+                                <div class="row">
+                                    <div class="col-12 col-lg-6">
+                                        <input type="text" class="form-control" id="name" name="name" placeholder="Nome" class="required">
+                                    </div>
+                                    <div class="col-12 col-lg-6">
+                                        <input type="email" class="form-control" id="email" name="email" placeholder="E-Mail" class="required email">
+                                    </div>
+                                    <div class="col-12">
+                                        <textarea name="content" class="form-control" id="message" cols="30" rows="10" placeholder="Mensagem" class="required"></textarea>
+                                    </div>
+                                    <div class="col-12">
+                                        <button class="btn newsbox-btn mt-30" type="submit">Enviar</button>
+                                    </div>
+                                </div>
+                            </form>
+                        </div>
+
+                        <!-- Comment Area Start -->
+                        <div class="comment_area clearfix mb-100 mt-5">
+                            <h2 class="mb-50">Comentários({{ $notice->comments->where('visible', true)->count() }}):</h2><hr>
+
+                            @if($notice->comments->where('visible', true)->count() > 0)
+                            <ol>
+                                @foreach($notice->comments->where('visible', true) as $comment)
+                                <!-- Single Comment Area -->
+                                <li class="single_comment_area" id="comment_{{ $comment->id }}">
+                                    <!-- Comment Content -->
+                                    <div class="comment-content d-flex">
+                                        <!-- Comment Meta -->
+                                        <div class="comment-meta">
+                                            <div class="d-flex">
+                                                <h3 class="post-author">{{ $comment->name }}</h3>
+                                                <span class="post-date"><strong>{{ $comment->createdAtFormat }}</strong></span>
+                                                <a href="#" class="reply">Responder</a>
+                                            </div>
+                                            <p>{!! str_ireplace("\n", '<br>', $comment->content) !!}</p>
+                                        </div>
+                                    </div>
+                                    @if($comment->subcomments->where('visible', true)->count() > 0)
+                                    <ol class="children">
+                                        @foreach($comment->subcomments->where('visible', true) as $subcomment)
+                                        <li class="single_comment_area" id="subcomment_{{ $subcomment->id }}">
+                                            <!-- Comment Content -->
+                                            <div class="comment-content d-flex">
+
+                                                <!-- Comment Meta -->
+                                                <div class="comment-meta">
+                                                    <div class="d-flex">
+                                                        <h3 class="post-author">{{ $subcomment->name }}</h3>
+                                                        <span class="post-date"><strong>{{ $subcomment->createdAtFormat }}</strong></span>
+                                                        <a href="#" class="reply">Responder</a>
+                                                    </div>
+                                                    <p>{!! str_ireplace("\n", '<br>', $subcomment->content) !!}</p>
+                                                </div>
+                                            </div>
+                                        </li>
+                                        @endforeach
+                                    </ol>
+                                    @endif
+                                </li>
+                                @endforeach
+                            </ol>
+                            @else
+                            <h3>Nesta notícia ainda não há comentários, Seja o primeiro a comentar!</h3>
+                            @endif
+                        </div>
+                    </div>
                 </div>
             </div>
         </div>
