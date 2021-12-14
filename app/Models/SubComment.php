@@ -44,14 +44,14 @@ class SubComment extends Model{
 		];
 	}
 
-	public function scopeSearch($query, $page = 0, $filter = ''){
+	public function scopeSearch($query, $id, $page = 0, $filter = ''){
 		$limit = config('paginate.limit');
 		$page = ($page - 1) * $limit;
 
-		return $query
+		return $query->where('comment_id', $id)
 					->where('name', 'LIKE', "%{$filter}%")
-					->orWhere('email', 'LIKE', "%{$filter}%")
-					->orWhere('content', 'LIKE', "%{$filter}%")
+					->where('email', 'LIKE', "%{$filter}%")
+					->where('content', 'LIKE', "%{$filter}%")
 					->orderBy('id', 'DESC')
 					->offset($page)
 					->limit($limit)

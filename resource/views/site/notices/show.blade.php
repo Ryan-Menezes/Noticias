@@ -101,7 +101,7 @@
                                             <div class="d-flex">
                                                 <h3 class="post-author">{{ $comment->name }}</h3>
                                                 <span class="post-date"><strong>{{ $comment->createdAtFormat }}</strong></span>
-                                                <a href="javascript:void(0)" class="reply" data-startresponse="form-comment-{{ $comment->id }}">Responder</a>
+                                                <a href="javascript:void(0)" class="reply" data-startresponse="form-comment-{{ $comment->id }}"><i class="fa fa-reply"></i> Responder</a>
                                             </div>
                                             <p>{!! str_ireplace("\n", '<br>', $comment->content) !!}</p>
                                         </div>
@@ -118,7 +118,7 @@
                                                     <div class="d-flex">
                                                         <h3 class="post-author">{{ $subcomment->name }}</h3>
                                                         <span class="post-date"><strong>{{ $subcomment->createdAtFormat }}</strong></span>
-                                                        <a href="javascript:void(0)" class="reply" data-startresponse="form-comment-{{ $comment->id }}">Responder</a>
+                                                        <a href="javascript:void(0)" class="reply" data-startresponse="form-comment-{{ $comment->id }}"><i class="fa fa-reply"></i> Responder</a>
                                                     </div>
                                                     <p>{!! str_ireplace("\n", '<br>', $subcomment->content) !!}</p>
                                                 </div>

@@ -3,7 +3,8 @@ namespace App\Controllers\Site;
 
 use Src\Classes\{
 	Request,
-	Controller
+	Controller,
+	Mail
 };
 use App\Models\{
 	Notice,
@@ -31,7 +32,16 @@ class CommentController extends Controller{
 
 		$this->validator($data, $this->comment->rolesCreate, $this->comment->messages);
 
-		if($notice->comments()->create($data)){
+		$comment = $notice->comments()->create($data);
+
+		if($comment){
+			Mail::isHtml(true)
+					->charset(config('mail.charset'))
+					->addFrom(config('app.contact.email'), config('app.name'))
+					->subject('Alguém fez um comentário na sua notícia: ' . $notice->title)
+					->message(view('mail.comment.comment', compact('notice', 'comment')))
+					->send(config('mail.to'), config('app.name'));
+
 			redirect(route('site.notices.show', ['slug' => $notice->slug]) . '#commentsarea', ['success' => 'Comentário enviado com sucesso']);
 		}
 
@@ -47,7 +57,31 @@ class CommentController extends Controller{
 
 		$this->validator($data, $this->subcomment->rolesCreate, $this->subcomment->messages);
 
-		if($comment->subcomments()->create($data)){
+		$subcomment = $comment->subcomments()->create($data);
+
+		if($subcomment){
+			Mail::isHtml(true)
+					->charset(config('mail.charset'))
+					->addFrom(config('app.contact.email'), config('app.name'))
+					->subject('Alguém respondeu o seu comentário na notícia: ' . $notice->title)
+					->message(view('mail.comment.response', [
+						'notice' => $notice,
+						'subcomment' => $subcomment,
+						'panel' => false
+					]))
+					->send($comment->email, $comment->name);
+
+			Mail::isHtml(true)
+					->charset(config('mail.charset'))
+					->addFrom(config('app.contact.email'), config('app.name'))
+					->subject('Alguém respondeu o seu comentário na notícia: ' . $notice->title)
+					->message(view('mail.comment.response', [
+						'notice' => $notice,
+						'subcomment' => $subcomment,
+						'panel' => true
+					]))
+					->send(config('mail.to'), config('app.name'));
+
 			redirect(route('site.notices.show', ['slug' => $notice->slug]) . '#commentsarea', ['success' => 'Resposta enviada com sucesso']);
 		}
 
