@@ -138,6 +138,7 @@ class NoticeController extends Controller{
 			redirect(route('panel.notices.create'), ['success' => 'Notícia cadastrada com sucesso']);
 		}
 
+		Storage::delete($data['poster']);
 		redirect(route('panel.notices.create'), ['error' => 'Notícia NÃO cadastrada, Ocorreu um erro no processo de cadastro!']);
 	}
 
@@ -286,6 +287,10 @@ class NoticeController extends Controller{
 			redirect(route('panel.notices.edit', ['id' => $notice->id]), ['success' => 'Notícia editada com sucesso']);
 		}
 
+		if(!empty($posterPrev)){
+			Storage::delete($data['poster']);
+		}
+	
 		redirect(route('panel.notices.edit', ['id' => $notice->id]), ['error' => 'Notícia NÃO editada, Ocorreu um erro no processo de edição!']);
 	}
 
@@ -297,7 +302,7 @@ class NoticeController extends Controller{
 		$content = json_decode($notice->content);
 
 		if($notice->delete()){
-			// Deletando porter da notícia
+			// Deletando poster da notícia
 			if(!empty($poster)){
 				Storage::delete($poster);
 			}

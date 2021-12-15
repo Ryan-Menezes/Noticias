@@ -5,12 +5,7 @@ use Src\Classes\{
 	Request,
 	Controller
 };
-use App\Models\{
-	Notice,
-	Comment,
-	SubComment,
-	Category
-};
+use App\Models\Notice;
 
 class NoticeController extends Controller{
 	private $notice;
@@ -22,24 +17,22 @@ class NoticeController extends Controller{
 	public function index(){
 		$request = new Request();
 
+		$builder = $request->except('page');
 		$page = $request->input('page') ?? 1;
-		$pages = ceil($this->notice->count() / config('paginate.limit'));
+		$limit = config('paginate.limit');
+		$pages = ceil($this->notice->count() / $limit);
 
-		$notices = $this->notice->search($page);
-		$categories = Category::all();
+		$notices = $this->notice->where('visible', true)->orderBy('id', 'DESC')->offset(($page - 1) * $limit)->limit($limit)->get();
 
-		if(count($notices) == 0) abort(404);
-
-		return view('site.notices.index', compact('notices', 'categories', 'pages'));
+		return view('site.notices.index', compact('notices', 'page', 'pages', 'builder'));
 	}
 
 	public function show($slug){
 		$notice = $this->notice->where('visible', true)->where('slug', $slug)->firstOrFail();
+
 		$notice->visits++;
 		$notice->save();
 
-		$categories = Category::all();
-
-		return view('site.notices.show', compact('notice', 'categories'));
+		return view('site.notices.show', compact('notice'));
 	}
 }

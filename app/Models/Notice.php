@@ -5,7 +5,7 @@ use Illuminate\Database\Eloquent\Model;
 
 class Notice extends Model{
 	public $table = 'notices';
-	protected $fillable = ['title', 'slug', 'tags', 'visible', 'visit', 'description', 'content', 'poster', 'user_id'];
+	protected $fillable = ['title', 'slug', 'tags', 'visible', 'visit', 'description', 'content', 'user_id'];
 	public $timestamps = true;
 
 	public function getRolesCreateAttribute(){
@@ -45,7 +45,7 @@ class Notice extends Model{
 			'title.max' 			=> 'O campo titulo deve conter no máximo %max% caracteres!',
 			'title.unique' 			=> 'Este título já está sendo utilizado, Tente outro titulo!',
 			'description.required' 	=> 'O preenchimento do campo descrição é obrigatório!',
-			'description.required' 	=> 'O campo descrição deve conter no mínimo %min% caracteres!'
+			'description.min' 		=> 'O campo descrição deve conter no mínimo %min% caracteres!'
 		];
 	}
 
