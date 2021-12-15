@@ -229,6 +229,20 @@ if(!function_exists('sitemapImages')){
 	}
 }
 
+if(!function_exists('mask')){
+	function mask(string $value, string $mask) : string{
+		$j = 0;
+
+		for($i = 0; $i < mb_strlen($mask); $i++){
+			if($mask[$i] == '#' && $j < mb_strlen($value)){
+				$mask[$i] = $value[$j++];
+			}
+		}
+
+		return $mask;
+	}
+}
+
 if(!function_exists('slugify')){
 	function slugify(string $string, string $separator = '-') : string{
 		$string = preg_replace('/[\t\n]/', ' ', $string);
@@ -308,6 +322,7 @@ if(!function_exists('slugify')){
 			'ÿ' => 'y',
 			'Ŕ' => 'R',
 			'ŕ' => 'r',
+			','	=> $separator,
 			'/' => $separator,
 			' ' => $separator,
 			'.' => $separator,

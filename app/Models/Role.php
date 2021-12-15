@@ -11,14 +11,14 @@ class Role extends Model{
 	public function getRolesCreateAttribute(){
 		return [
 			'name' 			=> "required|min:1|max:100|unique:{$this->table},name",
-			'description' 	=> 'required'
+			'description' 	=> 'required|min:1'
 		];
 	}
 
 	public function getRolesUpdateAttribute(){
 		return [
 			'name' 			=> "required|min:1|max:100|unique:{$this->table},name,{$this->name}",
-			'description' 	=> 'required'
+			'description' 	=> 'required|min:1'
 		];
 	}
 
@@ -28,7 +28,8 @@ class Role extends Model{
 			'name.min' 				=> 'O campo nome deve conter no mínimo %min% caracteres!',
 			'name.max' 				=> 'O campo nome deve conter no máximo %max% caracteres!',
 			'name.unique' 			=> 'Este nome já está sendo utilizado, Tente outro nome!',
-			'description.required' 	=> 'O preenchimento do campo descrição é obrigatório!'
+			'description.required' 	=> 'O preenchimento do campo descrição é obrigatório!',
+			'description.required' 	=> 'O campo descrição deve conter no mínimo %min% caracteres!'
 		];
 	}
 

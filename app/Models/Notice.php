@@ -11,16 +11,16 @@ class Notice extends Model{
 	public function getRolesCreateAttribute(){
 		return [
 			'title' 		=> "required|min:1|max:191|unique:{$this->table},title",
-			'description' 	=> 'required',
-			'content' 		=> 'required'
+			'description' 	=> 'required|min:1',
+			'content' 		=> 'required|min:1'
 		];
 	}
 
 	public function getRolesUpdateAttribute(){
 		return [
 			'title' 		=> "required|min:1|max:191|unique:{$this->table},title,{$this->title}",
-			'description' 	=> 'required',
-			'content' 		=> 'required'
+			'description' 	=> 'required|min:1',
+			'content' 		=> 'required|min:1'
 		];
 	}
 
@@ -44,7 +44,8 @@ class Notice extends Model{
 			'title.min' 			=> 'O campo titulo deve conter no mínimo %min% caracteres!',
 			'title.max' 			=> 'O campo titulo deve conter no máximo %max% caracteres!',
 			'title.unique' 			=> 'Este título já está sendo utilizado, Tente outro titulo!',
-			'description.required' 	=> 'O preenchimento do campo descrição é obrigatório!'
+			'description.required' 	=> 'O preenchimento do campo descrição é obrigatório!',
+			'description.required' 	=> 'O campo descrição deve conter no mínimo %min% caracteres!'
 		];
 	}
 

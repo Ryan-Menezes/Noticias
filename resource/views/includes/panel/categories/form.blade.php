@@ -10,5 +10,12 @@
 		'class' => 'required'
 	])
 
+	@include('includes.components.form.textarea', [
+		'name' => 'description',
+		'title' => 'Descrição',
+		'class' => 'required',
+		'value' => (isset($category) ? $category->description : null)
+	])
+
 	<button type="submit" class="btn btn-danger">Salvar <i class="fas fa-save"></i></button>
 </form>

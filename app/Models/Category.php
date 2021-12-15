@@ -5,18 +5,20 @@ use Illuminate\Database\Eloquent\Model;
 
 class Category extends Model{
 	public $table = 'categories';
-	protected $fillable = ['name', 'slug'];
+	protected $fillable = ['name', 'slug', 'description'];
 	public $timestamps = false;
 
 	public function getRolesCreateAttribute(){
 		return [
-			'name' 	=> "required|min:1|max:100|unique:{$this->table},name"
+			'name' 	=> "required|min:1|max:100|unique:{$this->table},name",
+			'description' => 'required|min:1'
 		];
 	}
 
 	public function getRolesUpdateAttribute(){
 		return [
-			'name' 	=> "required|min:1|max:100|unique:{$this->table},name,{$this->name}"
+			'name' 	=> "required|min:1|max:100|unique:{$this->table},name,{$this->name}",
+			'description' => 'required|min:1'
 		];
 	}
 
@@ -25,7 +27,9 @@ class Category extends Model{
 			'name.required' 		=> 'O preenchimento do campo nome é obrigatório!',
 			'name.min' 				=> 'O campo nome deve conter no mínimo %min% caracteres!',
 			'name.max' 				=> 'O campo nome deve conter no máximo %max% caracteres!',
-			'name.unique' 			=> 'Este nome já está sendo utilizado, Tente outro nome!'
+			'name.unique' 			=> 'Este nome já está sendo utilizado, Tente outro nome!',
+			'description.required' 	=> 'O preenchimento do campo descrição é obrigatório!',
+			'description.required' 	=> 'O campo descrição deve conter no mínimo %min% caracteres!'
 		];
 	}
 

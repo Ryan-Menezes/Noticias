@@ -10,12 +10,11 @@
 		'class' => 'required'
 	])
 
-	@include('includes.components.form.input', [
-		'type' => 'text', 
-		'name' => 'description', 
-		'title' => 'Descrição', 
-		'value' => (isset($role) ? $role->description : null),
-		'class' => 'required'
+	@include('includes.components.form.textarea', [
+		'name' => 'description',
+		'title' => 'Descrição',
+		'class' => 'required',
+		'value' => (isset($role) ? $role->description : null)
 	])
 
 	@include('includes.components.form.checkboxes', [
