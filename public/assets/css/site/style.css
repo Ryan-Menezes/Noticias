@@ -1569,14 +1569,6 @@ blockquote{
   padding-left: 30px;
   border-left: 4px solid #eb4034;
 }
-blockquote::after{
-  content: '❞';
-  font-size: 40px;
-}
-blockquote::before{
-  content: '❝';
-  font-size: 40px;
-}
 
 /* ====== The End ====== */
 

@@ -5,7 +5,7 @@ use Illuminate\Database\Eloquent\Model;
 
 class Notice extends Model{
 	public $table = 'notices';
-	protected $fillable = ['title', 'slug', 'tags', 'visible', 'visit', 'description', 'content', 'user_id'];
+	protected $fillable = ['title', 'slug', 'tags', 'visible', 'comments_active', 'visit', 'description', 'content', 'user_id'];
 	public $timestamps = true;
 
 	public function getRolesCreateAttribute(){
@@ -80,6 +80,6 @@ class Notice extends Model{
 	}
 
 	public function categories(){
-		return $this->belongsToMany(Category::class, 'notices_categories');
+		return $this->belongsToMany(Category::class, 'notices_categories', 'notice_id', 'category_id');
 	}
 }

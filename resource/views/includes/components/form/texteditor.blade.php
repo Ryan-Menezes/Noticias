@@ -7,7 +7,11 @@
 		<button type="button" class="btn btn-sm border textarea-editor-btn" title="Link" data-type="link"><i class="fas fa-link"></i></button>
 		<button type="button" class="btn btn-sm border textarea-editor-btn" title="Citação" data-type="blockquote"><i class="fas fa-quote-left"></i></button>
 
+		@if(!isset($notoptions))
 		<button type="button" class="btn btn-sm btn-danger btn-remove-element float-end" title="Remover Elemento"><i class="fas fa-trash-alt"></i></button>
+
+		<button type="button" class="btn btn-sm btn-dark btn-duplicate-element float-end" title="Duplicar Elemento"><i class="fas fa-clone"></i></button>
+		@endif
 	</div>
-	<textarea name="{{ $name }}" placeholder="{{ $title }}" rows="{{ $rows ?? 5 }}" class="form-control required">{{ $value ?? null }}</textarea>
+	<textarea name="{{ $name }}" placeholder="{{ $title }}" rows="{{ $rows ?? 5 }}" required class="form-control required">{{ $value ?? null }}</textarea>
 </div>

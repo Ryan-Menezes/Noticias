@@ -31,7 +31,7 @@ $(document).ready(function(){
     })
 
     // Configurações do form validade
-    $('*').delegate('.form-validate', 'focus load', function(){
+    $('*').delegate('.form-validate', 'load focus blur', function(){
         $(this).validate({
             errorElement: 'span',
             messages: {
@@ -105,9 +105,9 @@ $(document).ready(function(){
     $('*').delegate('.btn-remove-element', 'click', function(){
         if(confirm('Deseja realmente remover este elemento?')){
             let data = $(this).data()
-            let input = $('input[type="hidden"][name="images-notice-remove"]')
+            let input = $('input[type="hidden"][name="images-remove"]')
 
-            $(this).parents('.content-group').remove()
+            $(this).parents('.content-group:first').remove()
 
             if(data.remove != undefined && data.remove.length > 0){
                 if(input.val().length == 0){
@@ -117,6 +117,15 @@ $(document).ready(function(){
                 }
             } 
         }
+
+        return false
+    })
+
+    // Configurações de duplicação de um elemento
+    $('*').delegate('.btn-duplicate-element', 'click', function(){
+        let clone = $(this).parents('.content-group:first').clone()
+
+        $(this).parents('.content-group:first').after(clone)
 
         return false
     })
@@ -131,7 +140,11 @@ $(document).ready(function(){
             data: data
         })
         .done(function(result){
-            $('.content-notice').append(result)
+            if(data.container !== undefined){
+                $(data.container).append(result)
+            }else{
+                $('.content-elements').append(result)
+            }
         })
         .fail(function(){
             alert('FALHA DE REQUISIÇÃO!')
@@ -140,9 +153,30 @@ $(document).ready(function(){
         return false
     })
 
-    // Configurações para ordenar elementos do conteúdo de uma notícia
-    $('.content-notice').sortable()
+    // Configurações para ordenar elementos
+    $('.sortable').sortable()
+    $('*').delegate('.sortable', 'load mousemove', function(){
+        $(this).sortable()
+    })
 
     // Configuração para o container de checkbox
     // $('.container-check div').buttonset()
+
+    // Configuração para o container de tabs
+    $('.tabs').tabs()
+    $('*').delegate('.tabs', 'load mousemove', function(){
+        $(this).tabs()
+    })
+
+    // Configuração para o container de accordion
+    $('.accordion').accordion({
+        heightStyle: 'content',
+        collapsible: true
+    })
+    $('*').delegate('.accordion', 'load mousemove', function(){
+        $(this).accordion({
+            heightStyle: 'content',
+            collapsible: true
+        })
+    })
 })

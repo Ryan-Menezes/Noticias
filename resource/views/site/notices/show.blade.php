@@ -60,6 +60,7 @@
                         @endif
                     @endforeach
 
+                    @if($notice->comments_active)
                     <div class="post-a-comment-area mb-30 clearfix" id="commentsarea">
                         <h2 class="mb-50">Faça um Comentário:</h2>
 
@@ -148,10 +149,11 @@
                                 @endforeach
                             </ol>
                             @else
-                            <h3>Nesta notícia ainda não há comentários, Seja o primeiro a comentar!</h3>
+                            <p>Nesta notícia ainda não há comentários, Seja o primeiro a comentar!</p>
                             @endif
                         </div>
                     </div>
+                    @endif
                 </div>
             </div>
         </div>

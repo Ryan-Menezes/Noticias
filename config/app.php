@@ -6,7 +6,7 @@ return [
 	'timezone' 		=> 'America/Sao_Paulo',
 	'charset'		=> 'utf-8',
 	'lang' 			=> 'pt-br',
-	'debug'			=> false,
+	'debug'			=> true,
 	'description' 	=> 'O melhor site de notícia é na NewsBox' ,
 	'keywords' 		=> 'noticias, newsbox, tecnologia, cultura pop',
 	'social'		=> [

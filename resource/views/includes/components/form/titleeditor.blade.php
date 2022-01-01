@@ -6,7 +6,9 @@
 				'type' => 'text', 
 				'name' => 'titles[]', 
 				'title' => 'Titulo',
-				'value' => $value ?? null
+				'class' => 'required',
+				'value' => $value ?? null,
+				'required' => true
 			])
 		</div>
 		<div class="col-md-1">
@@ -21,11 +23,16 @@
 					'h5' => 'h5', 
 					'h6' => 'h6'
 				],
-				'class' => 'required'
+				'class' => 'required',
+				'required' => true
 			])
 		</div>
 		<div class="col-md-1">
+			@if(!isset($notoptions))
 			<button type="button" class="btn btn-sm btn-danger btn-remove-element float-end" title="Remover Elemento"><i class="fas fa-trash-alt"></i></button>
+
+			<button type="button" class="btn btn-sm btn-dark btn-duplicate-element float-end" title="Duplicar Elemento"><i class="fas fa-clone"></i></button>
+			@endif
 		</div>
 	</div>
 </div>
